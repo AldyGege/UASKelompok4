@@ -17,6 +17,13 @@ router.get('/register', function(req, res, next) {
 router.get('/login', function(req, res, next) {
   res.render('auth/login');
 });
+router.get('/detail_common', function(req, res, next) {
+  let nama_users;
+  res.render('users/detail_common/Page_awal', { nama_users: nama_users });
+});
+router.get('/apply', function(req, res, next) {
+  res.render('users/detail_common/PageApply');
+});
 
 
 router.post('/saveusers', async (req, res) => {
