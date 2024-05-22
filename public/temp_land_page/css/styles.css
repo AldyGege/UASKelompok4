@@ -4402,6 +4402,37 @@ textarea.form-control-lg {
   }
 }
 
+.lessons-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.lessons-list li {
+  margin-bottom: 10px;
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  background: #000;
+}
+
+.video-container iframe, .video-container object, .video-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mb-7 {
+  margin-bottom: 7rem !important;
+}
+
+
 .accordion {
   --bs-accordion-color: #212529;
   --bs-accordion-bg: #fff;
@@ -11231,6 +11262,27 @@ body {
   transform: scale(1); /* Memperbesar gambar */
   transition: transform 0.2s ease; /* Mengatur durasi dan jenis transisi */
 }
+
+/* CSS untuk mengatur tampilan kartu */
+#lessonCard {
+  max-height: 500px; /* Atur tinggi kartu */
+  overflow-y: auto; /* Aktifkan scrollbar jika konten melebihi tinggi maksimum */
+}
+
+/* CSS untuk mengatur tampilan ikon arah */
+.fa-chevron-up {
+  transition: transform 0.3s ease;
+}
+
+.fa-chevron-down {
+  transition: transform 0.3s ease;
+}
+
+.rotate180 {
+  transform: rotate(180deg);
+}
+
+
 
 
 .footer {

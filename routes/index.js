@@ -17,9 +17,9 @@ router.get('/register', function(req, res, next) {
 router.get('/login', function(req, res, next) {
   res.render('auth/login');
 });
-router.get('/detail_common', function(req, res, next) {
+router.get('/daftar_mentor', function(req, res, next) {
   let nama_users;
-  res.render('users/detail_common/Page_awal', { nama_users: nama_users });
+  res.render('users/detail_common/daftar_mentor', { nama_users: nama_users });
 });
 router.get('/apply', function(req, res, next) {
   res.render('users/detail_common/PageApply');
@@ -31,6 +31,10 @@ router.get('/class', function(req, res, next) {
 router.get('/course', function(req, res, next) {
   let nama_users;
   res.render('users/detail_common/detail_course', { nama_users: nama_users });
+});
+router.get('/view_commonusers', function(req, res, next) {
+  let nama_users;
+  res.render('users/detail_common/commonusers', { nama_users: nama_users });
 });
 
 

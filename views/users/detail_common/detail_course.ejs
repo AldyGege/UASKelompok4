@@ -8,12 +8,12 @@
     <div class="container px-4 px-lg-5">
         <!-- Featured Project Row-->
         <div class="gx-0 mb-4 mb-lg-5 text-center">
-                <div class="Page text-lg-left text-black" style="margin-right: 20px;">
+                <div class="Page text-lg-left text-black" style="margin-right: 20px;font-size: 2rem;">
                     <p>Kelas Online Gratis</p>
                     <p>UI Design : Wireframe to VisualDesign</p>
                 </div>
-                <p class="text-black mb-0 mt-3">Learn how to build a real project from scratch</p>
-                <div class="row">
+                <p class="text-black mb-0 mt-5">Learn how to build a real project from scratch</p>
+                <div class="row mt-5">
                     <div class="col">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
                             <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
@@ -35,97 +35,129 @@
 
         <!-- Ruang antara Featured Project dan Project One -->
         <div class="mb-4 mb-7"></div>
-        <!-- Project One Row-->
-        <div id="project_one" class="row gx-0 mb-4 mb-lg-5 align-items-center">
-            <div class="col-xl-4 col-lg-5">
-                <p class="text-success" style="font-size: 1.5rem;">Kapan lagi mencoba !!!</p>
-                <div class="Page text-center text-lg-left" style="margin-right: 20px; font-size: 1.8rem;">
-                    <p>Temukan potensimu dan </p>
-                    <p>wujudkan impianmu!</p>
-                </div>
-                <p class="text-black-50 mb-0">Berani mulai, berani mencoba, dan berani untuk menjadi yang lebih baik setiap hari</p>
-            </div>
-        </div>
-        <!-- Akhir Project One Row-->
 
-        <div class="contentClass">
-            <!-- Ruang antara Project One dan Project Two -->
-            <div class="mb-4 mb-lg-5"></div>
-            <!-- Project Two Row-->
-            <div class="row gx-4 mb-4 mb-lg-5 justify-content-center">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="/course" class="card-link">
-                            <div class="card-body">
-                                <img class="img-fluid mb-3 rounded-circle" src="/temp_land_page/assets/img/Temukan.jpg" alt="Illustration" style="width: 100px; height: 100px;">
-                                <h4 class="card-title" style="font-weight: bold;">UI Design : Wireframe to VisualDesign</h4>
-                                <p class="card-text">Mulailah menciptakan antarmuka yang menakjubkan dari konsep awal hingga desain visual yang sempurna!</p>
-                            </div>
-                        </a>
-                    </div>
+        <!-- Project One -->
+        <div class="row gx-4 mb-4 mb-lg-5 justify-content-center">
+            <!-- Video Utama -->
+            <div class="col-md-6">
+                <div class="video-container">
+                    <iframe id="main-video" src="https://www.youtube.com/embed/YOUR_DEFAULT_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="/course" class="card-link">
-                            <div class="card-body">
-                                <img class="img-fluid mb-3 rounded-circle" src="/temp_land_page/assets/img/Join.jpg" alt="Illustration" style="width: 100px; height: 100px;">
-                                <h4 class="card-title" style="font-weight: bold;">Learn Figma For Beginner</h4>
-                                <p class="card-text">Saling mendukung dalam perjalanan pendidikan, Jalin hubungan dengan sesama pembelajar, Bergabunglah dengan jaringan global kami</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="/course" class="card-link">
-                            <div class="card-body">
-                                <img class="img-fluid mb-3 rounded-circle" src="/temp_land_page/assets/img/Mulailah.jpg" alt="Illustration" style="width: 100px; height: 100px;">
-                                <h4 class="card-title" style="font-weight: bold;">Adobe Illustration: How to create icon for UI</h4>
-                                <p class="card-text">Langkah awal menuju kesuksesan, Rencanakan masa depan pendidikanmu, Tersedia untuk membantu mencapai tujuanmu</p>
-                            </div>
-                        </a>
+            </div>
+            <!-- Daftar Lesson -->
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body  ">
+                        <h5 class="fw-bold mb-3">Lessons</h5>
+                        <ul class="lessons-list">
+                            <li><button onclick="changeVideo('YOUR_VIDEO_ID_1')" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(190, 190, 190); color: black;"><i class="fas fa-video"></i> Lesson 1: Introduction</button></li>
+                            <li><button onclick="changeVideo('YOUR_VIDEO_ID_2')" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(190, 190, 190); color: black;"><i class="fas fa-video"></i> Lesson 2: Basics</button></li>
+                            <li><button onclick="changeVideo('YOUR_VIDEO_ID_3')" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(190, 190, 190); color: black;"><i class="fas fa-video"></i> Lesson 3: Advanced Techniques</button></li>
+                            <li><button onclick="goToCourseLessons()" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(190, 190, 190); color: black;"><i class="fas fa-film"></i> Lesson 4: 12 Video Lainnya</button></li>
+                        </ul>
+                        <button type="button" class="btn btn-primary btn-sm me-3 rounded-pill" style="background-color: #00B0FF; color: white;">Gabung Kelas</button>
                     </div>
                 </div>
             </div>
-            <!-- Akhir Project Two Row-->
-            <!-- Project Three Row-->
-            <div class="row gx-4 mb-4 mb-lg-5 justify-content-center hidden-content">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="/course" class="card-link">
-                            <div class="card-body">
-                                <img class="img-fluid mb-3 rounded-circle" src="/temp_land_page/assets/img/Temukan.jpg" alt="Illustration" style="width: 100px; height: 100px;">
-                                <h4 class="card-title" style="font-weight: bold;">UI Design : Wireframe to VisualDesign</h4>
-                                <p class="card-text">Mulailah menciptakan antarmuka yang menakjubkan dari konsep awal hingga desain visual yang sempurna!</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="/course" class="card-link">
-                            <div class="card-body">
-                                <img class="img-fluid mb-3 rounded-circle" src="/temp_land_page/assets/img/Join.jpg" alt="Illustration" style="width: 100px; height: 100px;">
-                                <h4 class="card-title" style="font-weight: bold;">Learn Figma For Beginner</h4>
-                                <p class="card-text">Saling mendukung dalam perjalanan pendidikan, Jalin hubungan dengan sesama pembelajar, Bergabunglah dengan jaringan global kami</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="/course" class="card-link">
-                            <div class="card-body">
-                                <img class="img-fluid mb-3 rounded-circle" src="/temp_land_page/assets/img/Mulailah.jpg" alt="Illustration" style="width: 100px; height: 100px;">
-                                <h4 class="card-title" style="font-weight: bold;">Adobe Illustration: How to create icon for UI</h4>
-                                <p class="card-text">Langkah awal menuju kesuksesan, Rencanakan masa depan pendidikanmu, Tersedia untuk membantu mencapai tujuanmu</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- Akhir Project Three Row-->
         </div>
+
+        <script>
+            function goToCourseLessons() {
+                // Mengarahkan pengguna ke bagian "Course Lessons" di halaman yang sama
+                window.location.href = '#CourseLessons';
+            }
+        </script>
+
+        <!-- fungsi ketika kita memencet lesson tertentu, lessonnya akan muncul di video utama. -->
+        <script>
+            function changeVideo(videoId) {
+                var mainVideo = document.getElementById('main-video');
+                mainVideo.src = 'https://www.youtube.com/embed/' + videoId;
+            }
+        </script>
+
+        <!-- Akhir Project One-->
+
+            <!-- Ruang antara Project One dan Project Two -->
+            <div class="mb-4 mb-7"></div>
+
+        <!-- Project Two  -->
+
+        <div class="row gx-4 mb-4 mb-lg-5 justify-content-start">
+            <!-- Tombol About -->
+            <div class="col-md-3">
+                <a href="#About">
+                    <button type="button" class="btn btn-primary btn-sm me-3 rounded-pill btn-hover" style="background-color: #E0E0E0; color: #4a4a4a;">About</button>
+                </a>
+            </div>
+            <!-- Tombol Lessons -->
+            <div class="col-md-3">
+                <a href="#lessonCard">
+                    <button type="button" class="btn btn-outline-primary btn-sm rounded-pill btn-hover" style="background-color: #E0E0E0; border-color: #E0E0E0; color: #4a4a4a;">Lessons</button>
+                </a>
+            </div>
+            <!-- Tombol Tools -->
+            <div class="col-md-3">
+                <a href="#Tools">
+                    <button type="button" class="btn btn-outline-primary btn-sm rounded-pill btn-hover" style="background-color: #E0E0E0; border-color: #E0E0E0; color: #4a4a4a;">Tools</button>
+                </a>
+            </div>
+            <!-- Tombol Review -->
+            <div class="col-md-3">
+                <a href="#Review">
+                    <button type="button" class="btn btn-outline-primary btn-sm rounded-pill btn-hover" style="background-color: #E0E0E0; border-color: #E0E0E0; color: #4a4a4a;">Review</button>
+                </a>
+            </div>
+        </div>
+        
+
+        <!-- Akhir Project Two  -->
+        <!-- Ruang antara Project Two dan Project Three -->
+        <div class="mb-4 mb-7"></div>
+
+        <!-- Project Three -->
+        <div class="row gx-4 mb-4 mb-lg-5 justify-content-start">
+            <!-- Kartu Pelajaran -->
+            <div class="col-md-6">
+                <div class="card mb-4" id="lessonCard">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="fw-bold mb-3">1. UI UX Desain</h5>
+                            <i id="toggleIcon" class="fas fa-chevron-up" style="cursor: pointer;" onclick="toggleLessons()"></i>
+                        </div>
+                        <ul class="lessons-list mt-3" id="lessonsList">
+                            <!-- Daftar Lesson -->
+                            <li><span onclick="changeVideo('YOUR_VIDEO_ID_1')"><i class="fas fa-video"></i> Lesson 1: Introduction</span></li>
+                            <li><span onclick="changeVideo('YOUR_VIDEO_ID_2')"><i class="fas fa-video"></i> Lesson 2: Basics</span></li>
+                            <li><span onclick="changeVideo('YOUR_VIDEO_ID_3')"><i class="fas fa-video"></i> Lesson 3: Advanced Techniques</span></li>
+                            <li><span onclick="changeVideo('YOUR_VIDEO_ID_4')"><i class="fas fa-video"></i> Lesson 4: Expert Tips</span></li>
+                            <li><span onclick="changeVideo('YOUR_VIDEO_ID_5')"><i class="fas fa-video"></i> Lesson 5: Advanced Strategies</span></li>
+                            <li><span onclick="changeVideo('YOUR_VIDEO_ID_6')"><i class="fas fa-video"></i> Lesson 6: Case Studies</span></li>
+                            <li><span onclick="changeVideo('YOUR_VIDEO_ID_7')"><i class="fas fa-video"></i> Lesson 7: Best Practices</span></li>
+                            <li><span onclick="changeVideo('YOUR_VIDEO_ID_8')"><i class="fas fa-video"></i> Lesson 8: Q&A Session</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        // JavaScript untuk menyembunyikan dan menampilkan daftar pelajaran
+        function toggleLessons() {
+            var lessonsList = document.getElementById("lessonsList");
+            var toggleIcon = document.getElementById("toggleIcon");
+            if (lessonsList.style.display === "none") {
+                lessonsList.style.display = "block";
+                toggleIcon.classList.add("rotate180");
+            } else {
+                lessonsList.style.display = "none";
+                toggleIcon.classList.remove("rotate180");
+            }
+        }
+
+        </script>
+        <!-- Akhir Project Three -->
+        
         <!-- load more -->
         <div class="text-center">
             <button type="button" class="btn btn-primary btn-sm me-3 rounded-pill" style="background-color: #00B0FF; color: white;" onclick="showMoreContent()">
@@ -136,22 +168,6 @@
 
         <!-- Ruang antara Project Six dan Project Seven -->
         <div class="mb-4 mb-7"></div>
-
-        <!-- Project Seven Row-->
-        <!-- <div class="row justify-content-center mb-4 mb-lg-5">
-            <div class="col-xl-4 col-lg-5 text-center mb-4">
-                <img class="img-fluid mb-3 rounded-circle" src="/temp_land_page/assets/img/Mentor3.jpg" alt="Illustration" style="width: 150px; height: 150px;">
-                <div class="Page text-center" style="margin-right: 20px; font-size: 1.8rem;">
-                    <p style="font-size: 2rem; font-weight: bold;">Time to Shine!</p>
-                </div> 
-                <p style="font-size: 1rem;">Membuat kelas online yang dapat bermanfaat untuk</p>
-                <p style="font-size: 1rem;">banyak orang & membangun passive income</p>
-                <button type="button" class="btn btn-primary btn-sm me-3 rounded-pill" style="background-color: #00B0FF; color: white;" onclick="window.location.href='/apply'">
-                    Continue to Apply
-                </button>
-            </div>
-        </div> -->
-        <!-- Akhir Project Seven Row-->
     </div>
 </section>
 
