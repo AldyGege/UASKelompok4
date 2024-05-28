@@ -1,0 +1,39 @@
+<%- include('../partials/katogori_pembelajaran/_head.ejs') %>
+<%- include('../partials/katogori_pembelajaran/_navbar.ejs') %>
+
+<div class="container my-5">
+  <!-- Judul Kategori Pembelajaran -->
+  <div class="text-center mb-4">
+    <h2>Kategori Pembelajaran</h2>
+  </div>
+
+  <!-- Tombol Tambah Data -->
+  <div class="text-right mb-4">
+    <a href="/kategori_pembelajaran/create" class="btn btn-success">Tambah Data</a>
+  </div>
+
+  <div class="row">
+    <% if (data && data.length > 0) { %>
+      <% data.forEach(function(kategori) { %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title"><%= kategori.nama_kategori %></h5>
+            </div>
+            <div class="card-footer">
+              <a href="/kategori_pembelajaran/edit/<%= kategori.id_kategori %>" class="btn btn-warning">Edit</a>
+              <a href="/kategori_pembelajaran/delete/<%= kategori.id_kategori %>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');">Hapus</a>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    <% } else { %>
+      <div class="col-12">
+        <p class="text-center">Tidak ada kategori yang tersedia.</p>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<%- include('../partials/katogori_pembelajaran/_contact.ejs') %>
+<%- include('../partials/katogori_pembelajaran/_footer.ejs') %>

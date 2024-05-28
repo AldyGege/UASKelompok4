@@ -1,0 +1,40 @@
+<%- include('../partials/alat/_head.ejs') %>
+<%- include('../partials/alat/_navbar') %>
+
+<div class="container my-5">
+  <!-- Judul Kelas Pembelajaran -->
+  <div class="text-center mb-4">
+    <h2>Alat </h2>
+  </div>
+
+  <!-- Tambah Data Button -->
+  <div class="text-right mb-4">
+    <a href="/alat/create" class="btn btn-success">Tambah Data</a>
+  </div>
+
+  <div class="row">
+    <% if (data && data.length > 0) { %>
+      <% data.forEach(function(alat_index) { %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <img src="/images/upload/<%= alat_index.file_alat %>" class="card-img-top" alt="<%= alat_index.nama_alat %>">
+            <div class="card-body">
+              <h5 class="card-title"><%= alat_index.nama_alat %></h5>
+            </div>
+            <div class="card-footer">
+              <a href="/alat/edit/<%= alat_index.id_alat %>" class="btn btn-warning">Edit</a>
+              <a href="/alat/delete/<%= alat_index.id_alat %>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kelas ini?');">Delete</a>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    <% } else { %>
+      <div class="col-12">
+        <p class="text-center">Tidak ada kelas yang tersedia.</p>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<%- include('../partials/alat/_contact') %>
+<%- include('../partials/alat/_footer') %>
