@@ -1,0 +1,43 @@
+<%- include('../partials/kelas_pembelajaran/_head.ejs') %>
+<%- include('../partials/kelas_pembelajaran/_navbar') %>
+
+<div class="container my-5">
+  <!-- Judul Kelas Pembelajaran -->
+  <div class="text-center mb-4">
+    <h2>Kelas Pembelajaran</h2>
+  </div>
+
+  <!-- Tambah Data Button -->
+  <div class="text-right mb-4">
+    <a href="/kelas_pembelajaran/create" class="btn btn-success">Tambah Data</a>
+  </div>
+
+  <div class="row">
+    <% if (data && data.length > 0) { %>
+      <% data.forEach(function(kelas) { %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <img src="/images/upload/<%= kelas.file_kelas %>" class="card-img-top" alt="<%= kelas.judul %>">
+            <div class="card-body">
+              <h5 class="card-title"><%= kelas.judul %></h5>
+              <p class="card-text"><%= kelas.deskripsi %></p>
+              <p class="card-text">Harga: Rp. <%= kelas.harga_kelas %></p>
+              <a href="<%= kelas.link_kelas %>" class="btn btn-primary" target="_blank">Lihat Kelas</a>
+            </div>
+            <div class="card-footer">
+              <a href="/kelas_pembelajaran/edit/<%= kelas.id_kelas %>" class="btn btn-warning">Edit</a>
+              <a href="/kelas_pembelajaran/delete/<%= kelas.id_kelas %>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kelas ini?');">Delete</a>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    <% } else { %>
+      <div class="col-12">
+        <p class="text-center">Tidak ada kelas yang tersedia.</p>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<%- include('../partials/kelas_pembelajaran/_contact') %>
+<%- include('../partials/kelas_pembelajaran/_footer') %>

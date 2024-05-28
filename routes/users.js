@@ -12,7 +12,7 @@ router.get('/', async function (req, res, next) {
       if(Data[0].role != 2){
         res.redirect('/logout')
       }else{
-      res.render("users/index", {
+      res.render("users/detail_users/users", {
         title: "Users Home",
         email: Data[0].email,
         nama_users: Data[0].nama_users,
