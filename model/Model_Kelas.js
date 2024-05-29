@@ -4,7 +4,7 @@ class Model_Kelas_Pembelajaran {
 
     static async getAll() {
         return new Promise((resolve, reject) => {
-            connection.query('select * from kelas_pembelajaran order by id_kelas desc', (err, rows) => {
+            connection.query('SELECT kp.*, a.nama_alat, a.file_alat, k.nama_kategori FROM kelas_pembelajaran kp LEFT JOIN alat a ON kp.id_alat = a.id_alat LEFT JOIN kategori_pembelajaran k ON kp.id_kategori = k.id_kategori ORDER BY kp.id_kelas DESC;', (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -28,7 +28,7 @@ class Model_Kelas_Pembelajaran {
     
     static async getId(id) {
         return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM kelas_pembelajaran where id_kelas = ' + id, (err, rows) => {
+            connection.query('SELECT kp.*, a.nama_alat, a.file_alat, k.nama_kategori FROM kelas_pembelajaran kp LEFT JOIN alat a ON kp.id_alat = a.id_alat LEFT JOIN kategori_pembelajaran k ON kp.id_kategori = k.id_kategori WHERE kp.id_kelas = ' + id, (err, rows) => {
                 if(err) {
                     reject(err);
                 }else {
