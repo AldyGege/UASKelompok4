@@ -1,6 +1,6 @@
 const connection = require('../config/database');
 
-class Model_Kelas_Pembelajaran {
+class Model_Kelas {
 
     static async getAll() {
         return new Promise((resolve, reject) => {
@@ -13,6 +13,7 @@ class Model_Kelas_Pembelajaran {
             });
         });
     }
+    
     static async Store(Data) {
         return new Promise((resolve, reject) => {
             connection.query('insert into kelas_pembelajaran set ?', Data, function(err, result){
@@ -65,4 +66,4 @@ class Model_Kelas_Pembelajaran {
 
 }
 
-module.exports = Model_Kelas_Pembelajaran;
+module.exports = Model_Kelas;

@@ -3,7 +3,7 @@
 
 <div class="container my-5">
   <!-- Judul Kelas Pembelajaran -->
-  <div class="text-center mb-4">
+  <div class="text-center mb-4" style="margin-top: 80px;">
     <h2>Kelas Pembelajaran</h2>
   </div>
 
@@ -22,6 +22,8 @@
               <h5 class="card-title"><%= kelas.judul %></h5>
               <p class="card-text"><%= kelas.deskripsi %></p>
               <p class="card-text">Harga: Rp. <%= kelas.harga_kelas %></p>
+              <p class="card-text">Alat: <%= kelas.nama_alat %></p>
+              <p class="card-text">Kategori: <%= kelas.nama_kategori %></p>
               <a href="<%= kelas.link_kelas %>" class="btn btn-primary" target="_blank">Lihat Kelas</a>
             </div>
             <div class="card-footer">
