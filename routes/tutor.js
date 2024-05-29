@@ -9,10 +9,10 @@ router.get('/', async function (req, res, next) {
     let Data = await Model_Users.getId(id);
     if (Data.length > 0) {
       //Kondisi pengecekan
-      if(Data[0].role != 3){
+      if(Data[0].role != 2){
         res.redirect('/logout')
       }else{
-      res.render("users/detail_common/commonusers", {
+      res.render("users/tutor/index", {
         title: "Users Home",
         email: Data[0].email,
         nama_users: Data[0].nama_users,

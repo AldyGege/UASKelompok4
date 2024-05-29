@@ -15,7 +15,7 @@ var commonusersRouter = require('./routes/commonusers');
 var kelas_pembelajaranRouter = require('./routes/kelas_pembelajaran');
 var Alat_Router = require('./routes/alat');
 var kategori_pembelajaranRouter = require('./routes/kategori_pembelajaran');
-
+var Tutor_Router = require('./routes/tutor');
 
 var app = express();
 
@@ -52,6 +52,7 @@ app.use('/commonusers', commonusersRouter);
 app.use('/kelas_pembelajaran', kelas_pembelajaranRouter);
 app.use('/alat', Alat_Router);
 app.use('/kategori_pembelajaran', kategori_pembelajaranRouter);
+app.use('/tutor', Tutor_Router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
