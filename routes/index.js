@@ -75,7 +75,7 @@ router.post('/log', async (req, res) => {
         res.redirect('/superusers');
         }else if(Data[0].role == 2){
           req.flash('Success', 'berhasil Login');
-          res.redirect('/users');
+          res.redirect('/tutor');
         }
         else if(Data[0].role == 3){
           req.flash('Success', 'berhasil Login');
