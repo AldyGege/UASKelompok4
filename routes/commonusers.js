@@ -1,5 +1,7 @@
 var express = require("express");
 const Model_Users = require("../model/Model_Users");
+const Model_Alat = require("../model/Model_Alat");
+const Model_Kelas = require("../model/Model_Kelas");
 var router = express.Router();
 
 /* GET users listing. */
@@ -8,24 +10,29 @@ router.get('/', async function (req, res, next) {
     let id = req.session.userId;
     let Data = await Model_Users.getId(id);
     if (Data.length > 0) {
-      //Kondisi pengecekan
-      if(Data[0].role != 3){
-        res.redirect('/logout')
-      }else{
-      res.render("users/detail_common/commonusers", {
-        title: "Users Home",
-        email: Data[0].email,
-        nama_users: Data[0].nama_users,
-        role: req.session.role
-      });
-    }
-    //Akhir Kondisi
-
+      // Kondisi pengecekan
+      if (Data[0].role != 3) {
+        res.redirect('/logout');
+      } else {
+        // Ambil data alat dan kelas
+        let alat = await Model_Alat.getAll();
+        let kelas = await Model_Kelas.getAll();
+        
+        // Render halaman dengan data
+        res.render("users/detail_common/commonusers", {
+          title: "Users Home",
+          email: Data[0].email,
+          nama_users: Data[0].nama_users,
+          role: req.session.role,
+          alat: alat,
+          kelas: kelas
+        });
+      }
     } else {
-      res.status(401).json({ error: "user tidak ada" });
+      res.redirect('/logout');
     }
   } catch (error) {
-    res.status(501).json("Butuh akses login");
+    next(error);
   }
 });
 
