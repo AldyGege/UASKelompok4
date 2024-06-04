@@ -20,6 +20,24 @@
             <input type="text" class="form-control" name="judul" value="<%= judul %>" required>
         </div>   
         <div class="mb-3">
+          <label for="nama" class="form-label">Nama Kategori</label>
+          <select class="form-select" aria-label="Pilih Alat" name="id_kategori" required>
+              <option selected>Pilih Kategori</option>
+              <% for(var i=0; i < data1.length; i++){ %>
+                  <option value="<%= data1[i].id_kategori %>"><%= data1[i].nama_kategori %></option>
+              <% } %>
+          </select>
+      </div>
+        <div class="mb-3">
+          <label for="nama" class="form-label">Nama Alat</label>
+          <select class="form-select" aria-label="Pilih Alat" name="id_alat" required>
+              <option selected>Pilih Alat</option>
+              <% for(var i=0; i < data2.length; i++){ %>
+                  <option value="<%= data2[i].id_alat %>"><%= data2[i].nama_alat %></option>
+              <% } %>
+          </select>
+      </div>
+        <div class="mb-3">
             <label for="nama" class="form-label">Deskripsi</label>
             <input type="text" class="form-control" name="deskripsi" value="<%= deskripsi %>" required>
         </div>   
