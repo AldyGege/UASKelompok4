@@ -36,6 +36,10 @@ router.get('/view_commonusers', function(req, res, next) {
   let nama_users;
   res.render('users/detail_common/commonusers', { nama_users: nama_users });
 });
+router.get('/alur_belajar', function(req, res, next) {
+  let nama_users;
+  res.render('users/detail_common/alur_belajar', { nama_users: nama_users });
+});
 
 
 router.post('/saveusers', async (req, res) => {

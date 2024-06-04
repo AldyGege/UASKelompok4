@@ -4402,6 +4402,35 @@ textarea.form-control-lg {
   }
 }
 
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  background: #000;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.card-expand:hover {
+  height: auto;
+}
+
+.card-expand:hover .points-list,
+.card-expand:hover .learn-more {
+  display: block;
+}
+.points-list li {
+  margin-bottom: 10px; /* Atur spasi antara setiap poin */
+}
+
 .lessons-list {
   list-style-type: none;
   padding: 0;
@@ -11113,6 +11142,16 @@ body {
   font-weight: 800;
   white-space: nowrap;
 }
+
+.card-expand:hover {
+  height: auto;
+}
+
+.card-expand:hover .points-list,
+.card-expand:hover .learn-more {
+  display: block;
+}
+
 
 .card-link {
   color: inherit; /* Inherits the text color */
