@@ -33,7 +33,7 @@ router.get('/course', function(req, res, next) {
   res.render('users/detail_common/detail_course', { nama_users: nama_users });
 });
 
-router.get('/alur_belajar', function(req, res, next) {
+router.get('/view_alur_belajar', function(req, res, next) {
   let nama_users;
   res.render('users/detail_common/alur_belajar', { nama_users: nama_users });
 });

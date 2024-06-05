@@ -1,0 +1,48 @@
+<%- include('../partials/alur_belajar/_head.ejs') %>
+<%- include('../partials/alur_belajar/_navbar.ejs') %>
+
+<style>
+  .small-img {
+    width: 200px; /* Set fixed width */
+    height: 200px; /* Set fixed height */
+    margin-bottom: 10px;
+  }
+</style>
+
+<div class="container my-5">
+  <!-- Judul Alur Belajar -->
+  <div class="text-center mb-4" style="margin-top: 80px;">
+    <h2>Alur Belajar</h2>
+  </div>
+
+  <!-- Tombol Tambah Data -->
+  <div class="text-right mb-4">
+    <a href="/alur_belajar/create" class="btn btn-success">Tambah Data</a>
+  </div>
+
+  <div class="row">
+    <% if (data && data.length > 0) { %>
+      <% data.forEach(function(alur_belajar) { %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body text-center">
+              <img src="/images/upload/<%= alur_belajar.file_alur_belajar %>" class="card-img-top small-img" alt="<%= alur_belajar.alur_belajar %>">
+              <h5 class="card-title"><%= alur_belajar.alur_belajar %></h5>
+            </div>
+            <div class="card-footer">
+              <a href="/alur_belajar/edit/<%= alur_belajar.id_alur_belajar %>" class="btn btn-warning">Edit</a>
+              <a href="/alur_belajar/delete/<%= alur_belajar.id_alur_belajar %>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus alur_belajar ini?');">Hapus</a>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    <% } else { %>
+      <div class="col-12">
+        <p class="text-center">Tidak ada Alur Belajar yang tersedia.</p>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<%- include('../partials/alur_belajar/_contact.ejs') %>
+<%- include('../partials/alur_belajar/_footer.ejs') %>
