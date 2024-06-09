@@ -89,14 +89,7 @@
             <label class="form-label">Password</label>
             <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
           </div>
-          <div class="mb-3">
-            <label class="form-label">Role</label>
-            <select name="role" name="role" id="role" class="form-control" required>
-              <option value="1"> Admin </option>
-              <option value="2"> Tutor </option>
-              <option value="3"> Mahasiswa </option>
-            </select>
-          </div>
+          <input type="hidden" name="role" value="1">
           <button type="submit" class="btn btn-primary">Register</button>
           <div class="login-link">
             <a href="/login">Already have an account? Login</a>
