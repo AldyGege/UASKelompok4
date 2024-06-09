@@ -14,6 +14,13 @@ router.get('/', function(req, res, next) {
 router.get('/register', function(req, res, next) {
   res.render('auth/register');
 });
+
+router.get('/register_tutor', function(req, res, next) {
+  res.render('auth/register_tutor');
+});
+router.get('/register_user', function(req, res, next) {
+  res.render('auth/register_user');
+});
 router.get('/login', function(req, res, next) {
   res.render('auth/login');
 });
