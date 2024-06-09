@@ -1,0 +1,87 @@
+<%- include ('../partials/__head') %> 
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    <!-- Sidebar -->
+    <%- include ('../partials/__sidebar') %> 
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            <!-- Topbar -->
+            <%- include ('../partials/__topbar') %> 
+            <!-- End of Topbar -->
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Edit User</h1>
+                    <a href="./" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-sm text-white-50"></i>  Back</a>
+                </div>
+                <!-- Content Row -->
+                <div class="row">
+                    <!-- Edit User Card Example -->
+                    <div class="col justify-content-center">
+                        <div class="card-body">
+                            <h2 class="mt-2 mb-4 text-center">Edit Data User</h2>
+                            <form action="/profile/update/<%= id %>" method="POST">
+                                <div class="container">
+                                    <div class="row">                                
+                                        <div class="col  mb-3">
+                                            <label for="nama_users" class="form-label">Nama</label>
+                                            <input type="text" class="form-control" name="nama_users" value="<%= nama_users %>" required>
+                                        </div>
+                                        <div class="col  mb-3">
+                                            <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+                                            <select class="form-select" name="jenis_kelamin" required>
+                                                <option value="laki-laki" <%= jenis_kelamin === 'laki-laki' ? 'selected' : '' %>>Laki-laki</option>
+                                                <option value="perempuan" <%= jenis_kelamin === 'perempuan' ? 'selected' : '' %>>Perempuan</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col  mb-3">
+                                            <label for="agama_users" class="form-label">Agama</label>
+                                            <select class="form-select" name="agama_users" required>
+                                                <option value="islam" <%= agama_users === 'islam' ? 'selected' : '' %>>Islam</option>
+                                                <option value="kristen" <%= agama_users === 'kristen' ? 'selected' : '' %>>Kristen</option>
+                                                <option value="katolik" <%= agama_users === 'katolik' ? 'selected' : '' %>>Katolik</option>
+                                                <option value="hindu" <%= agama_users === 'hindu' ? 'selected' : '' %>>Hindu</option>
+                                                <option value="budha" <%= agama_users === 'budha' ? 'selected' : '' %>>Budha</option>
+                                                <option value="konghucu" <%= agama_users === 'konghucu' ? 'selected' : '' %>>Konghucu</option>
+                                            </select>
+                                        </div>
+                                        <div class="col  mb-3">
+                                            <label for="alamat_users" class="form-label">Alamat</label>
+                                            <textarea class="form-control" name="alamat_users" rows="3" required><%= alamat_users %></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col mb-3">
+                                            <label for="level_users" class="form-label">Level</label>
+                                            <select class="form-select" name="level_users" required>
+                                                <option value="1" <%= level_users === '1' ? 'selected' : '' %>>Admin</option>
+                                                <option value="2" <%= level_users === '2' ? 'selected' : '' %>>User</option>
+                                            </select>
+                                        </div>
+                                        <div class="col  mb-3">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" class="form-control" name="email" value="<%= email %>" required>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center mt-3">
+                                        <div class="col text-center">
+                                            <button type="submit" class="btn btn-sm btn-success">Simpan</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+<%- include ('../partials/__footer') %>
