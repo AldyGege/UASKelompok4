@@ -10,7 +10,7 @@
         <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
             <div class="col-xl-4 col-lg-5">
                 <div class="Page text-lg-left text-black" style="margin-right: 20px;">
-                    <p>UI/UX Design Class</p>
+                    <p><%= kategori.nama_kategori %></p>
                 </div>
                 <p class="text-black mb-0">Gabung sekarang dan mulai perjalananmu untuk menjadi desainer profesional.</p>
             </div>
@@ -38,79 +38,31 @@
         <div class="contentClass">
             <!-- Ruang antara Project One dan Project Two -->
             <div class="mb-4 mb-lg-5"></div>
+    
             <!-- Project Two Row-->
             <div class="row gx-4 mb-4 mb-lg-5 justify-content-center">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="/course" class="card-link">
-                            <div class="card-body">
-                                <img class="img-fluid mb-3 rounded-circle" src="/temp_land_page/assets/img/Temukan.jpg" alt="Illustration" style="width: 100px; height: 100px;">
-                                <h4 class="card-title" style="font-weight: bold;">UI Design : Wireframe to VisualDesign</h4>
-                                <p class="card-text">Mulailah menciptakan antarmuka yang menakjubkan dari konsep awal hingga desain visual yang sempurna!</p>
-                            </div>
-                        </a>
+                <% for(let i = 0; i < kelas.length; i++) { %>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100">
+                            <a href="/commonusers/course/<%= kelas[i].id_kelas %>" class="card-link">
+                                <div class="card-body">
+                                    <img class="img-fluid mb-3 rounded-circle" src="/images/upload/<%= kelas[i].file_kelas %>" alt="Illustration" style="width: 100px; height: 100px;">
+                                    <h4 class="card-title" style="font-weight: bold;"><%= kelas[i].judul %></h4>
+                                    <p class="card-text"><%= kelas[i].deskripsi %></p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="/course" class="card-link">
-                            <div class="card-body">
-                                <img class="img-fluid mb-3 rounded-circle" src="/temp_land_page/assets/img/Join.jpg" alt="Illustration" style="width: 100px; height: 100px;">
-                                <h4 class="card-title" style="font-weight: bold;">Learn Figma For Beginner</h4>
-                                <p class="card-text">Saling mendukung dalam perjalanan pendidikan, Jalin hubungan dengan sesama pembelajar, Bergabunglah dengan jaringan global kami</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="/course" class="card-link">
-                            <div class="card-body">
-                                <img class="img-fluid mb-3 rounded-circle" src="/temp_land_page/assets/img/Mulailah.jpg" alt="Illustration" style="width: 100px; height: 100px;">
-                                <h4 class="card-title" style="font-weight: bold;">Adobe Illustration: How to create icon for UI</h4>
-                                <p class="card-text">Langkah awal menuju kesuksesan, Rencanakan masa depan pendidikanmu, Tersedia untuk membantu mencapai tujuanmu</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                <% } %>
             </div>
             <!-- Akhir Project Two Row-->
-            <!-- Project Three Row-->
+    
+            <!-- Project Three Row (if needed) -->
             <div class="row gx-4 mb-4 mb-lg-5 justify-content-center hidden-content">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="/course" class="card-link">
-                            <div class="card-body">
-                                <img class="img-fluid mb-3 rounded-circle" src="/temp_land_page/assets/img/Temukan.jpg" alt="Illustration" style="width: 100px; height: 100px;">
-                                <h4 class="card-title" style="font-weight: bold;">UI Design : Wireframe to VisualDesign</h4>
-                                <p class="card-text">Mulailah menciptakan antarmuka yang menakjubkan dari konsep awal hingga desain visual yang sempurna!</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="/course" class="card-link">
-                            <div class="card-body">
-                                <img class="img-fluid mb-3 rounded-circle" src="/temp_land_page/assets/img/Join.jpg" alt="Illustration" style="width: 100px; height: 100px;">
-                                <h4 class="card-title" style="font-weight: bold;">Learn Figma For Beginner</h4>
-                                <p class="card-text">Saling mendukung dalam perjalanan pendidikan, Jalin hubungan dengan sesama pembelajar, Bergabunglah dengan jaringan global kami</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="/course" class="card-link">
-                            <div class="card-body">
-                                <img class="img-fluid mb-3 rounded-circle" src="/temp_land_page/assets/img/Mulailah.jpg" alt="Illustration" style="width: 100px; height: 100px;">
-                                <h4 class="card-title" style="font-weight: bold;">Adobe Illustration: How to create icon for UI</h4>
-                                <p class="card-text">Langkah awal menuju kesuksesan, Rencanakan masa depan pendidikanmu, Tersedia untuk membantu mencapai tujuanmu</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                <!-- Repeat similar structure if needed -->
             </div>
+            <!-- Akhir Project Three Row-->
+        </div>
             <!-- Akhir Project Three Row-->
         </div>
         <!-- load more -->

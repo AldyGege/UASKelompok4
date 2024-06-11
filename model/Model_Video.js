@@ -12,6 +12,22 @@ class Model_Video {
             });
         });
     }    
+    static async getByIdKelas(id_kelas) {
+        return new Promise((resolve, reject) => {
+            connection.query(
+                'SELECT * FROM video WHERE id_kelas = ? ORDER BY id_video DESC',
+                [id_kelas],
+                (err, rows) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(rows);
+                    }
+                }
+            );
+        });
+    }
+    
     static async getAll() {
         return new Promise((resolve, reject) => {
             connection.query('select * from video order by id_video desc', (err, rows) => {

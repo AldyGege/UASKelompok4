@@ -9,8 +9,8 @@
         <!-- Featured Project Row-->
         <div class="gx-0 mb-4 mb-lg-5 text-center">
                 <div class="Page text-lg-left text-black" style="margin-right: 20px;font-size: 2rem;">
-                    <p>Kelas Online Gratis</p>
-                    <p>UI Design : Wireframe to VisualDesign</p>
+                    <p><%= kelas.judul %></p>
+                    <p>Rp <%= kelas.harga_kelas %></p>
                 </div>
                 <p class="text-black mb-0 mt-5">Learn how to build a real project from scratch</p>
                 <div class="row mt-5">
@@ -36,45 +36,57 @@
         <!-- Ruang antara Featured Project dan Project One -->
         <div class="mb-4 mb-7"></div>
 
-        <!-- Project One -->
         <div class="row gx-4 mb-4 mb-lg-5 justify-content-center">
             <!-- Video Utama -->
             <div class="col-md-6">
                 <div class="video-container">
-                    <iframe id="main-video" src="https://www.youtube.com/embed/YOUR_DEFAULT_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+                    <iframe id="main-video" src="https://www.youtube.com/embed/<%= video[0].link_video %>" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
             <!-- Daftar Lesson -->
             <div class="col-md-6">
                 <div class="card mb-4">
-                    <div class="card-body  ">
+                    <div class="card-body">
                         <h5 class="fw-bold mb-3">Lessons</h5>
                         <ul class="lessons-list">
-                            <li><button onclick="changeVideo('YOUR_VIDEO_ID_1')" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(190, 190, 190); color: black;"><i class="fas fa-video"></i> Lesson 1: Introduction</button></li>
-                            <li><button onclick="changeVideo('YOUR_VIDEO_ID_2')" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(190, 190, 190); color: black;"><i class="fas fa-video"></i> Lesson 2: Basics</button></li>
-                            <li><button onclick="changeVideo('YOUR_VIDEO_ID_3')" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(190, 190, 190); color: black;"><i class="fas fa-video"></i> Lesson 3: Advanced Techniques</button></li>
-                            <li><button onclick="goToCourseLessons()" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(190, 190, 190); color: black;"><i class="fas fa-film"></i> Lesson 4: 12 Video Lainnya</button></li>
+                            <% for(let i = 0; i < video.length; i++) { %>
+                                <li><button onclick="changeVideo('<%= video[i].link_video %>')" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(190, 190, 190); color: black;"><i class="fas fa-video"></i> <%= video[i].judul_video %></button></li>
+                            <% } %>
                         </ul>
                         <button type="button" class="btn btn-primary btn-sm me-3 rounded-pill" style="background-color: #00B0FF; color: white;">Gabung Kelas</button>
                     </div>
                 </div>
             </div>
         </div>
-
+        
         <script>
             function goToCourseLessons() {
                 // Mengarahkan pengguna ke bagian "Course Lessons" di halaman yang sama
                 window.location.href = '#CourseLessons';
             }
-        </script>
-
-        <!-- fungsi ketika kita memencet lesson tertentu, lessonnya akan muncul di video utama. -->
-        <script>
-            function changeVideo(videoId) {
+        
+            function changeVideo(videoUrl) {
+                var videoId = getYouTubeVideoId(videoUrl);
                 var mainVideo = document.getElementById('main-video');
                 mainVideo.src = 'https://www.youtube.com/embed/' + videoId;
             }
+        
+            function getYouTubeVideoId(url) {
+                var videoId = '';
+                var match = url.match(/[?&]v=([^&]+)/);
+                if (match) {
+                    videoId = match[1];
+                } else {
+                    // If URL is in the format of 'https://youtu.be/VIDEO_ID'
+                    match = url.match(/youtu\.be\/([^&]+)/);
+                    if (match) {
+                        videoId = match[1];
+                    }
+                }
+                return videoId;
+            }
         </script>
+        
 
         <!-- Akhir Project One-->
 

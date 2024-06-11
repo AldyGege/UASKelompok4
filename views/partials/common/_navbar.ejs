@@ -17,12 +17,12 @@
                         <!-- Memanggil class dari backend secara berulang -->
                         <% for(let i = 0; i < kategori.length; i++) { %>
                             <li>
-                                <a class="dropdown-item" href="/commonusers/class">
+                                <a class="dropdown-item" href="/commonusers/class/<%= kategori[i].id_kategori %>">
                                     <h5 class="card-title mb-0" style="font-weight: bold; font-size: 1rem;"><%= kategori[i].nama_kategori %></h5>
                                 </a>
                             </li>
-                        <% } %>
-                        <!-- existing code frontend -->
+                        <% } %>                        
+11                        <!-- existing code frontend -->
                             <!-- <li><a class="dropdown-item" href="/class">UI/UX Design</a></li>
                             <li><a class="dropdown-item" href="#">Web Development</a></li>
                             <li><a class="dropdown-item" href="#">Android Development</a></li>
@@ -38,7 +38,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownAlur">
                         <% alur_belajar.forEach(function(item) { %>
                             <li>
-                                <a class="dropdown-item" href="/class">
+                                <a class="dropdown-item" href="/commonusers/class">
                                     <div class="row">
                                         <div class="col">
                                             <img class="img-fluid rounded-circle" src="/images/upload/<%= item.file_alur_belajar %>" alt="<%= item.alur_belajar %>" style="width: 30px; height: 30px;">
