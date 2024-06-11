@@ -1,7 +1,7 @@
-<%- include('../../partials/common/_head') %>
+<%- include('../../partials/users/_head') %>
 
 <!-- Navigation-->
-<%- include('../../partials/common/_navbar') %>
+<%- include('../../partials/users/_navbar') %>
 
 <!-- Masthead-->
 <header class="masthead" id="about">
@@ -17,6 +17,81 @@
         </div>
     </div>
 </header>
+
+<!-- Include Axios library -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<!-- Script to fetch and display videos -->
+<script>
+  // Function to extract YouTube video ID from URL
+  function extractYouTubeId(url) {
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    var match = url.match(regExp);
+    return (match && match[7].length == 11) ? match[7] : false;
+  }
+
+  // Function to create YouTube embed URL
+  function createYouTubeEmbedUrl(youtubeId) {
+    return `https://www.youtube.com/embed/${youtubeId}`;
+  }
+
+  // Function to fetch and display videos
+  async function fetchAndDisplayVideos() {
+    try {
+      // Fetch data from server
+      const response = await axios.get('/video/getall');
+      const data = response.data;
+
+      // Loop through video data and display them
+      data.forEach(video => {
+        // Extract YouTube video ID from the link
+        const youtubeId = extractYouTubeId(video.link_video);
+        
+        // Create HTML elements for each video
+        const videoElement = document.createElement('div');
+        videoElement.classList.add('row', 'gx-0', 'mb-5', 'mb-lg-0', 'justify-content-center');
+        videoElement.innerHTML = `
+          <div class="col-lg-6">
+            <img class="img-fluid" src="https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg" alt="Thumbnail" data-bs-toggle="modal" data-bs-target="#videoModal${video.id_video}">
+          </div>
+          <div class="col-lg-6 order-lg-first">
+            <div class="bg-black text-center h-100 project">
+              <div class="d-flex h-100">
+                <div class="project-text w-100 my-auto text-center text-lg-right">
+                  <h4 class="text-white">${video.judul_video}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Modal -->
+          <div class="modal fade" id="videoModal${video.id_video}" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="ratio ratio-16x9">
+                    <iframe src="${createYouTubeEmbedUrl(youtubeId)}" frameborder="0" allowfullscreen></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        // Append video elements to the page
+        document.getElementById('projects').appendChild(videoElement);
+      });
+    } catch (error) {
+      console.error('Error fetching videos:', error);
+    }
+  }
+
+  // Call the function when the page loads
+  window.onload = fetchAndDisplayVideos;
+</script>
+
 <!-- Projects-->
 <section class="projects-section bg-light" id="projects">
     <div class="container px-4 px-lg-5">
@@ -88,62 +163,75 @@
                 <!-- To make this form functional, sign up at-->
                 <!-- https://startbootstrap.com/solution/contact-forms-->
                 <!-- to get an API token!-->
-                <form class="form-signup" action="/inputclass" method="POST">
-                    <!-- Text input-->
+                <form class="form-signup" action="/video/store" method="POST">
+                    <!-- Title input-->
                     <div class="row input-group-newsletter mb-2">
                         <div class="col">
-                            <input class="form-control" id="textInput" type="text" placeholder="Enter text..." aria-label="Enter text..." data-sb-validations="required" />
+                            <input class="form-control" id="titleInput" name="judul_video" type="text" placeholder="Enter title..." aria-label="Enter title..." data-sb-validations="required" />
                         </div>
                     </div>
-                    <div class="invalid-feedback mt-2" data-sb-feedback="textInput:required">A text input is required.</div>
-                    <h2 class="text-white mb-2 mt-5">Title:</h2>
-                    <!-- Description input-->
+                    <div class="invalid-feedback mt-2" data-sb-feedback="titleInput:required">A title is required.</div>
+                    
+                    <h2 class="text-white mb-2 mt-5">Link:</h2>
+                    <!-- Link input-->
                     <div class="row input-group-newsletter mb-2">
                         <div class="col">
-                            <input class="form-control" id="textInput" type="text" placeholder="Enter text..." aria-label="Enter text..." data-sb-validations="required" />
+                            <input class="form-control" id="linkInput" name="link_video" type="text" placeholder="Enter link..." aria-label="Enter link..." data-sb-validations="required" />
                         </div>
                     </div>
-                    <div class="invalid-feedback mt-2" data-sb-feedback="textInput:required">A text input is required.</div>
-                    <h2 class="text-white mb-2 mt-5">Description:</h2>
-                    <!-- Description input-->
+                    <div class="invalid-feedback mt-2" data-sb-feedback="linkInput:required">A link is required.</div>
+                    
+                    <input type="hidden" id="userIdInput" name="id_users" value="<%= id_users %>" data-sb-validations="required">
+
+                    <h2 class="text-white mb-2 mt-5">Class:</h2>
+                    <!-- Class dropdown-->
                     <div class="row input-group-newsletter mb-2">
                         <div class="col">
-                            <textarea class="form-control" id="descriptionInput" placeholder="Enter description..." aria-label="Enter description..." data-sb-validations="required" rows="4"></textarea>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="classDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Select Class
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="classDropdown">
+                                    <% kelas.forEach(function(kelasItem) { %>
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center" href="#" data-value="<%= kelasItem.id_kelas %>">
+                                                <img src="/public/images/upload/<%= kelasItem.file_kelas %>" alt="<%= kelasItem.file_kelas %>" class="me-2" style="width: 40px; height: 40px;">
+                                                <%= kelasItem.judul %>
+                                            </a>
+                                        </li>
+                                    <% }); %>
+                                </ul>
+                                <input type="hidden" name="id_kelas" id="classInput" data-sb-validations="required">
+                            </div>
                         </div>
+                        <div class="invalid-feedback mt-2" data-sb-feedback="classInput:required">A class is required.</div>
+                        
                     </div>
-                    <div class="invalid-feedback mt-2" data-sb-feedback="descriptionInput:required">A description is required.</div>
-                
-                    <div class="invalid-feedback mt-2" data-sb-feedback="descriptionInput:required">A description is required.</div>
-                    <h2 class="text-white mb-2 mt-5">price:</h2>
-                    <!-- Price input-->
-                    <div class="row input-group-newsletter mb-2">
-                        <div class="col">
-                            <input class="form-control" id="priceInput" type="text" placeholder="Enter price..." aria-label="Enter price..." data-sb-validations="required" />
-                        </div>
-                    </div>
-                    <div class="invalid-feedback mt-2" data-sb-feedback="priceInput:required">A price is required.</div>
-                
+                    <div class="invalid-feedback mt-2" data-sb-feedback="classInput:required">A class is required.</div>
+                    
                     <!-- Submit button-->
                     <div class="row input-group-newsletter">
                         <div class="col-auto">
-                            <button class="btn btn-primary disabled" id="submitButton" type="submit">Insert!</button>
+                            <button class="btn btn-primary" id="submitButton" type="submit">Insert!</button>
                         </div>
                     </div>
-                
+                    
                     <!-- Submit success message-->
                     <div class="d-none" id="submitSuccessMessage">
                         <div class="text-center mb-3 mt-2 text-white">
                             <div class="fw-bolder">Form submission successful!</div>
-                            if something happens, communicate with
+                            If something happens, communicate with
                             <br />
                             <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
                         </div>
                     </div>
+                    
                     <!-- Submit error message-->
                     <div class="d-none" id="submitErrorMessage">
                         <div class="text-center text-danger mb-3 mt-2">Error sending message!</div>
                     </div>
                 </form>
+                
                 
                 
             </div>

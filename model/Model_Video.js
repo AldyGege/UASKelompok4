@@ -1,7 +1,17 @@
 const connection = require('../config/database');
 
 class Model_Video {
-
+    static async getByIdUsers(id_users) {
+        return new Promise((resolve, reject) => {
+            connection.query('SELECT * FROM video WHERE id_users = ? ORDER BY id_video DESC', [id_users], (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }    
     static async getAll() {
         return new Promise((resolve, reject) => {
             connection.query('select * from video order by id_video desc', (err, rows) => {
