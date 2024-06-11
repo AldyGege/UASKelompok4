@@ -63,7 +63,7 @@ router.post(
   upload.single("file_kelas"),
   async function (req, res, next) {
     try {
-      let { judul, deskripsi, harga_kelas, link_kelas, id_kategori, id_alat } = req.body;
+      let { judul, deskripsi, harga_qkelas, link_kelas, id_kategori, id_alat } = req.body;
       let Data = {
         judul,
         deskripsi,

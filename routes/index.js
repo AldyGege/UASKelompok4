@@ -2,13 +2,29 @@ var express = require('express');
 var router = express.Router();
 
 const bcrypt = require('bcrypt');
-
-var Model_Users = require('../model/Model_Users');
+const Model_Alat = require("../model/Model_Alat.js");
+const Model_Users = require("../model/Model_Users.js");
+const Model_Kelas = require("../model/Model_Kelas.js");
 const e = require('express');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', async function(req, res, next) {
+  try {
+    let classes = await Model_Kelas.getAll();
+    let tools = await Model_Alat.getAll();
+    res.render('index', { 
+      title: 'Express',
+      classes: classes,
+      tools: tools 
+    });
+  } catch (error) {
+    console.error(error);
+    res.render('index', { 
+      title: 'Express',
+      classes: [],
+      tools: [] 
+    });
+  }
 });
 
 router.get('/register', function(req, res, next) {
