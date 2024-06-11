@@ -30,6 +30,13 @@ router.get('/', async function(req, res, next) {
 router.get('/register', function(req, res, next) {
   res.render('auth/register');
 });
+
+router.get('/register_tutor', function(req, res, next) {
+  res.render('auth/register_tutor');
+});
+router.get('/register_user', function(req, res, next) {
+  res.render('auth/register_user');
+});
 router.get('/login', function(req, res, next) {
   res.render('auth/login');
 });
@@ -48,14 +55,11 @@ router.get('/course', function(req, res, next) {
   let nama_users;
   res.render('users/detail_common/detail_course', { nama_users: nama_users });
 });
-router.get('/view_commonusers', function(req, res, next) {
-  let nama_users;
-  res.render('users/detail_common/commonusers', { nama_users: nama_users });
-});
-router.get('/alur_belajar', function(req, res, next) {
-  let nama_users;
-  res.render('users/detail_common/alur_belajar', { nama_users: nama_users });
-});
+
+// router.get('/view_alur_belajar', function(req, res, next) {
+//   let nama_users;
+//   res.render('users/detail_common/alur_belajar', { nama_users: nama_users });
+// });
 
 
 router.post('/saveusers', async (req, res) => {
@@ -95,7 +99,7 @@ router.post('/log', async (req, res) => {
         res.redirect('/superusers');
         }else if(Data[0].role == 2){
           req.flash('Success', 'berhasil Login');
-          res.redirect('/tutor');
+          res.redirect('/users');
         }
         else if(Data[0].role == 3){
           req.flash('Success', 'berhasil Login');

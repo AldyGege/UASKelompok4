@@ -1,0 +1,49 @@
+<%- include('../partials/katogori_pembelajaran/_head.ejs') %>
+<%- include('../partials/katogori_pembelajaran/_navbar.ejs') %>
+
+<div class="container my-5">
+    <!-- Judul -->
+    <div class="text-center mb-4" style="margin-top: 80px;">
+        <h2>User Profile</h2>
+    </div>
+        <!-- Profile Page Content -->
+        <div class="container-fluid mt-5">
+            <!-- Content -->
+                <div class="container mt-5">
+                    <div class="row mt-5">
+                        <div class="col-4 text-center">
+                            <img src="/images/profile.png" width="250" alt="Nama Gambar" class="img-fluid">
+                        </div>
+                        <div class="col-8">
+                            <div class="card shadow-lg mb-4 border-left-success">
+                                <div class="card-header py-3 d-flex justify-content-end align-items-end">
+                                    <a href="/profile/edit/<%= data[0].id_users %>" class="btn btn-sm btn-success text-black">
+                                        <i class="fas fa-edit fa-sm text-black"></i> Edit Profile
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="profile-info">
+                                        <p><strong>Nama :</strong> <%= data[0].nama_users %></p>
+                                        <p><strong>Email :</strong> <%= data[0].email %></p>
+                                        <p><strong>Level :</strong> 
+                                            <% if(data[0].role == 1) { %>
+                                                Admin
+                                            <% } else if (data[0].role == 2) { %>
+                                                Konsumen
+                                            <% } else { %>
+                                                User
+                                        <% } %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Content Row -->
+        </div>
+        <!-- /Profile Page Content -->
+</div>
+
+<%- include('../partials/katogori_pembelajaran/_contact.ejs') %>
+<%- include('../partials/katogori_pembelajaran/_footer.ejs') %>

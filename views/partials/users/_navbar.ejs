@@ -13,11 +13,9 @@
                         Kelas
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownKelas">
-                        <!-- Memanggil class dari backend secara berulang -->
-                        <li><a class="dropdown-item" href="/class">UI/UX Design</a></li>
-                        <li><a class="dropdown-item" href="#">Web Development</a></li>
-                        <li><a class="dropdown-item" href="#">Flutter</a></li>
-                        <li><a class="dropdown-item" href="#">Android Development</a></li>
+                        <% kelas.forEach(function(kelasItem) { %>
+                            <li><a class="dropdown-item" href=""><%= kelasItem.judul %></a></li>
+                        <% }); %>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -40,7 +38,7 @@
                 </svg>
             </div>
             <div class="mt-3 mx-1 text-black">
-                <p>Hello, <%- nama_users %></p>
+                <p>Hello, <%= nama_users %></p>
             </div>
             <div class="dropdown">
                 <button class="btn p-0 border-0 mx-3" type="button" id="dropdownUserMenu" data-bs-toggle="dropdown" aria-expanded="false">

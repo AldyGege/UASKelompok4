@@ -33,8 +33,10 @@ router.get("/", async function (req, res, next) {
 
 router.get("/create", async function (req, res, next) {
   try {
+    let id = req.session.userId;
     let kelas = await Model_Kelas.getAll();
     res.render("video/create", {
+      id_users : id,
       judul_video: "",
       link_video: "",
       id_kelas: "",
@@ -48,23 +50,34 @@ router.get("/create", async function (req, res, next) {
 
 router.post("/store", async function (req, res, next) {
     try {
-      let { judul_video, link_video, id_kelas } = req.body;
+      let {  judul_video, link_video, id_kelas, id_users  } = req.body;
       console.log(req.body); // Tambahkan logging untuk debugging
       let Data = {
         judul_video,
         link_video,
-        id_kelas
+        id_kelas,
+        id_users
       };
       await Model_Video.Store(Data);
       req.flash("success", "Berhasil menyimpan data");
-      res.redirect("/video");
+      res.redirect("/users");
     } catch (error) {
       console.log(error); // Menampilkan pesan kesalahan ke konsol
       req.flash("error", "Gagal menyimpan data");
-      res.redirect("/video");
+      res.redirect("/");
     }
   });
   
+  router.get("/getall", async function (req, res, next) {
+    try {
+        let id = req.session.userId; // Ambil id pengguna dari sesi
+        let videos = await Model_Video.getByIdUsers(id); // Panggil model untuk mendapatkan data video
+        res.json(videos); // Kirim data video dalam format JSON
+    } catch (error) {
+        console.log(error); // Tangani kesalahan jika terjadi
+        res.status(500).json({ message: "Internal Server Error" }); // Beri respon status 500 jika terjadi kesalahan
+    }
+});
 
 router.get("/edit/(:id)", async function (req, res, next) {
   try {
@@ -75,6 +88,7 @@ router.get("/edit/(:id)", async function (req, res, next) {
     if (rows.length > 0) {
       res.render("video/edit", {
         id: rows[0].id_video,
+        id_users: id,
         judul_video: rows[0].judul_video,
         link_video: rows[0].link_video,
         id_kelas: rows[0].id_kelas,
@@ -89,12 +103,22 @@ router.get("/edit/(:id)", async function (req, res, next) {
     next(error); // Meneruskan kesalahan ke penanganan kesalahan berikutnya (jika ada)
   }
 });
-
+router.get("/", async function (req, res, next) {
+  try {
+      let id = req.session.userId;
+      let Data = await Model_Video.getByIdUsers(id);
+      res.render("video/video", { data: Data });
+  } catch (error) {
+      console.log(error);
+      res.redirect("/login");
+  }
+});
 router.post("/update/:id", async function (req, res, next) {
   try {
     let id = req.params.id;
     let { judul_video, link_video, id_kelas } = req.body;
     let Data = {
+        id_users,
         judul_video,
         link_video,
         id_kelas
