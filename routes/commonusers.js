@@ -1,7 +1,8 @@
 var express = require("express");
 const Model_Users = require("../model/Model_Users");
 const Model_Alat = require("../model/Model_Alat");
-const Model_Kelas = require("../model/Model_Kelas");
+const Model_Alur_Belajar = require("../model/Model_Alur_Belajar");
+const Model_Kategori_Pembelajaran = require("../model/Model_Kategori");
 var router = express.Router();
 
 /* GET users listing. */
@@ -14,9 +15,10 @@ router.get('/', async function (req, res, next) {
       if (Data[0].role != 3) {
         res.redirect('/logout');
       } else {
-        // Ambil data alat dan kelas
+        // Ambil data alat dan alur_belajar
         let alat = await Model_Alat.getAll();
-        let kelas = await Model_Kelas.getAll();
+        let alur_belajar = await Model_Alur_Belajar.getAll();
+        let kategori = await Model_Kategori_Pembelajaran.getAll();
         
         // Render halaman dengan data
         res.render("users/detail_common/commonusers", {
@@ -25,7 +27,8 @@ router.get('/', async function (req, res, next) {
           nama_users: Data[0].nama_users,
           role: req.session.role,
           alat: alat,
-          kelas: kelas
+          alur_belajar: alur_belajar,
+          kategori: kategori
         });
       }
     } else {
@@ -35,6 +38,40 @@ router.get('/', async function (req, res, next) {
     next(error);
   }
 });
+
+router.get('/class', async function (req, res, next) {
+  try {
+    let id = req.session.userId;
+    let Data = await Model_Users.getId(id);
+    if (Data.length > 0) {
+      // Kondisi pengecekan
+      if (Data[0].role != 3) {
+        res.redirect('/logout');
+      } else {
+        // Ambil data alat dan alur_belajar
+        let alat = await Model_Alat.getAll();
+        let alur_belajar = await Model_Alur_Belajar.getAll();
+        let kategori = await Model_Kategori_Pembelajaran.getAll();
+        
+        // Render halaman dengan data
+        res.render("users/detail_common/detail_kelas", {
+          title: "Users Home",
+          email: Data[0].email,
+          nama_users: Data[0].nama_users,
+          role: req.session.role,
+          alat: alat,
+          alur_belajar: alur_belajar,
+          kategori: kategori
+        });
+      }
+    } else {
+      res.redirect('/logout');
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 router.get("/daftartutor", async function (req, res, next) {
   try {
