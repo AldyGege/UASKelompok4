@@ -19,12 +19,16 @@ class Activity {
             if (err) {
                 reject(err);
             }
-
-            connection.query('SELECT * FROM activity WHERE judul = ?', newActivity.judul, (err, rows) => {
-                if (err) {
-                    return connection.rollback(() => {
-                        reject(err);
-                    });
+            const selectQuery = `
+            SELECT * FROM activity 
+            WHERE id_users = ? AND (id_kelas = ? OR id_video = ?)
+        `;
+            connection.query(selectQuery, [newActivity.id_users, newActivity.id_kelas, newActivity.id_video], (err, rows) => {
+              if (err) {
+                  return connection.rollback(() => {
+                      reject(err);
+                  });
+              
                 } else {
                     if (rows.length > 0) {
                         return connection.rollback(() => {
