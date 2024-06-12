@@ -1,4 +1,5 @@
 var express = require("express");
+const Model_Activity = require("../model/Model_Activity");
 const Model_Users = require("../model/Model_Users");
 const Model_Alat = require("../model/Model_Alat");
 const Model_Video = require("../model/Model_Video");
@@ -79,6 +80,24 @@ router.get('/class/:id', async function (req, res, next) {
   }
 });
 
+router.post('/tonton/:id', async function (req, res, next) {
+  try {
+    let { id_video } = req.body; 
+    let Data = {
+      id_users: req.session.userId,
+      id_video: id_video,
+    };
+    await Model_Activity.create(Data);
+    req.flash("success", "Berhasil menyimpan data");
+    res.redirect("/kategori_pembelajaran");
+  } catch (error) {
+    console.log(error); // Menampilkan pesan kesalahan ke konsol
+    req.flash("error", "Gagal menyimpan data");
+    res.redirect("/kategori_pembelajaran");
+  }
+});
+
+
 router.get('/course/:id', async function (req, res, next) {
   try {
     let id = req.session.userId;
@@ -108,6 +127,7 @@ router.get('/course/:id', async function (req, res, next) {
           video: video,
           kelas: kelas[0],
           alur_belajar: alur_belajar,
+          globalVideoIDs: 1,
           kategori: kategori[0]
         });
       }
