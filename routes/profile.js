@@ -7,7 +7,8 @@ const Model_Kategori_Pembelajaran = require('../model/Model_Kategori');
 const Model_Alur_Belajar = require('../model/Model_Alur_Belajar');
 const bcrypt = require('bcrypt');
 
-router.get('/commonuser', async function(req, res, next) {
+
+router.get('/user', async function(req, res, next) {
     try {
         let id = req.session.userId;
         let email = req.session.email;
@@ -28,7 +29,6 @@ router.get('/commonuser', async function(req, res, next) {
         let activityRows3 = await Model_Video.getAll();
 
 
-<<<<<<< HEAD
         // Redirect based on user level
         let userLevel = userRows[0].role;
         if (userLevel == 1) {
@@ -55,7 +55,6 @@ router.get('/commonuser', async function(req, res, next) {
                 activities: activityRows
             });
         }
-=======
         res.render('profile/profile', {
             data: userRows,
             email: email,
@@ -63,7 +62,36 @@ router.get('/commonuser', async function(req, res, next) {
             activitiescls: activityRows2,
             video: activityRows3
         });
->>>>>>> 528a3baecb620329968d8726d84e86d0e856f17e
+    } catch (error) {
+        console.error("Error fetching user or activity data:", error);
+        res.status(500).render('error', {
+            message: 'Internal server error',
+            error: error
+        });
+    }
+});
+
+router.get('/commonuser', async function(req, res, next) {
+    try {
+        let id = req.session.userId;
+        let email = req.session.email;
+
+        // Fetch user data
+        let userRows = await Model_Users.getId(id);
+        
+        // Fetch activity data
+        let activityRows = await Model_Activity.getByIdUsers(id);
+        let activityRows2 = await Model_Activity.getByIdUsers2(id);
+        let activityRows3 = await Model_Video.getAll();
+
+
+        res.render('common_profile/profile', {
+            data: userRows,
+            email: email,
+            activities: activityRows,
+            activitiescls: activityRows2,
+            video: activityRows3
+        });
     } catch (error) {
         console.error("Error fetching user or activity data:", error);
         res.status(500).render('error', {
