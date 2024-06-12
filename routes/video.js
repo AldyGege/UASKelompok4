@@ -70,11 +70,11 @@ router.post("/store", async function (req, res, next) {
   
   router.get("/getall", async function (req, res, next) {
     try {
-        let id = req.session.userId; // Ambil id pengguna dari sesi
-        let videos = await Model_Video.getByIdUsers(id); // Panggil model untuk mendapatkan data video
-        res.json(videos); // Kirim data video dalam format JSON
+        let id = req.session.userId;
+        let videos = await Model_Video.getByIdUsers(id);
+        res.json(videos);
     } catch (error) {
-        console.log(error); // Tangani kesalahan jika terjadi
+        console.log(error);
         res.status(500).json({ message: "Internal Server Error" }); // Beri respon status 500 jika terjadi kesalahan
     }
 });
@@ -86,7 +86,7 @@ router.get("/edit/(:id)", async function (req, res, next) {
     let kelas = await Model_Kelas.getAll(id);
     // Periksa apakah ada data yang ditemukan untuk ID yang diberikan
     if (rows.length > 0) {
-      res.render("video/edit", {
+      res.render("users/detail_users/edit", {
         id: rows[0].id_video,
         id_users: id,
         judul_video: rows[0].judul_video,
@@ -95,7 +95,6 @@ router.get("/edit/(:id)", async function (req, res, next) {
         data1: kelas,
       });
     } else {
-      // Jika tidak ada data yang ditemukan, kembalikan respon 404
       res.status(404).send('Data not found');
     }
   } catch (error) {
@@ -116,20 +115,19 @@ router.get("/", async function (req, res, next) {
 router.post("/update/:id", async function (req, res, next) {
   try {
     let id = req.params.id;
-    let { judul_video, link_video, id_kelas } = req.body;
+    let { judul_video, link_video, id_kelas,id_users} = req.body;
     let Data = {
-        id_users,
-        judul_video,
-        link_video,
-        id_kelas
+      judul_video,
+      link_video,
+      id_kelas,
     };
     await Model_Video.Update(id, Data);
     req.flash("Success", "Berhasil menyimpan data");
-    res.redirect("/video");
+    res.redirect("/users");
   } catch (error) {
     console.log(error); // Menampilkan pesan kesalahan ke konsol
     req.flash("error", "Terjadi kesalahan pada fungsi");
-    res.redirect("/video");
+    res.redirect("/users");
   }
 });
 
@@ -137,7 +135,7 @@ router.get("/delete/(:id)", async function (req, res) {
   let id = req.params.id;
   await Model_Video.Delete(id);
   req.flash("Success", "Berhasil menghapus data");
-  res.redirect("/video");
+  res.redirect("/users");
 });
 
 module.exports = router;
