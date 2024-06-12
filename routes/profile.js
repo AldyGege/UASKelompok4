@@ -5,7 +5,7 @@ const Model_Video = require('../model/Model_Video');
 const Model_Activity = require('../model/Model_Activity');
 const bcrypt = require('bcrypt');
 
-router.get('/', async function(req, res, next) {
+router.get('/commonuser', async function(req, res, next) {
     try {
         let id = req.session.userId;
         let email = req.session.email;
