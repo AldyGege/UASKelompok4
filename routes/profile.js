@@ -7,7 +7,7 @@ const Model_Kategori_Pembelajaran = require('../model/Model_Kategori');
 const Model_Alur_Belajar = require('../model/Model_Alur_Belajar');
 const bcrypt = require('bcrypt');
 
-router.get('/', async function(req, res, next) {
+router.get('/commonuser', async function(req, res, next) {
     try {
         let id = req.session.userId;
         let email = req.session.email;
