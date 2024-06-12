@@ -1,87 +1,89 @@
-<%- include ('../partials/__head') %> 
-
-<!-- Page Wrapper -->
-<div id="wrapper">
-    <!-- Sidebar -->
-    <%- include ('../partials/__sidebar') %> 
-    <!-- End of Sidebar -->
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-        <!-- Main Content -->
-        <div id="content">
-            <!-- Topbar -->
-            <%- include ('../partials/__topbar') %> 
-            <!-- End of Topbar -->
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Edit User</h1>
-                    <a href="./" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-sm text-white-50"></i>  Back</a>
-                </div>
-                <!-- Content Row -->
-                <div class="row">
-                    <!-- Edit User Card Example -->
-                    <div class="col justify-content-center">
-                        <div class="card-body">
-                            <h2 class="mt-2 mb-4 text-center">Edit Data User</h2>
-                            <form action="/profile/update/<%= id %>" method="POST">
-                                <div class="container">
-                                    <div class="row">                                
-                                        <div class="col  mb-3">
-                                            <label for="nama_users" class="form-label">Nama</label>
-                                            <input type="text" class="form-control" name="nama_users" value="<%= nama_users %>" required>
-                                        </div>
-                                        <div class="col  mb-3">
-                                            <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                                            <select class="form-select" name="jenis_kelamin" required>
-                                                <option value="laki-laki" <%= jenis_kelamin === 'laki-laki' ? 'selected' : '' %>>Laki-laki</option>
-                                                <option value="perempuan" <%= jenis_kelamin === 'perempuan' ? 'selected' : '' %>>Perempuan</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col  mb-3">
-                                            <label for="agama_users" class="form-label">Agama</label>
-                                            <select class="form-select" name="agama_users" required>
-                                                <option value="islam" <%= agama_users === 'islam' ? 'selected' : '' %>>Islam</option>
-                                                <option value="kristen" <%= agama_users === 'kristen' ? 'selected' : '' %>>Kristen</option>
-                                                <option value="katolik" <%= agama_users === 'katolik' ? 'selected' : '' %>>Katolik</option>
-                                                <option value="hindu" <%= agama_users === 'hindu' ? 'selected' : '' %>>Hindu</option>
-                                                <option value="budha" <%= agama_users === 'budha' ? 'selected' : '' %>>Budha</option>
-                                                <option value="konghucu" <%= agama_users === 'konghucu' ? 'selected' : '' %>>Konghucu</option>
-                                            </select>
-                                        </div>
-                                        <div class="col  mb-3">
-                                            <label for="alamat_users" class="form-label">Alamat</label>
-                                            <textarea class="form-control" name="alamat_users" rows="3" required><%= alamat_users %></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col mb-3">
-                                            <label for="level_users" class="form-label">Level</label>
-                                            <select class="form-select" name="level_users" required>
-                                                <option value="1" <%= level_users === '1' ? 'selected' : '' %>>Admin</option>
-                                                <option value="2" <%= level_users === '2' ? 'selected' : '' %>>User</option>
-                                            </select>
-                                        </div>
-                                        <div class="col  mb-3">
-                                            <label for="email" class="form-label">Email</label>
-                                            <input type="email" class="form-control" name="email" value="<%= email %>" required>
-                                        </div>
-                                    </div>
-                                    <div class="row justify-content-center mt-3">
-                                        <div class="col text-center">
-                                            <button type="submit" class="btn btn-sm btn-success">Simpan</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom styles -->
+    <style>
+        body {
+            background-color: #f8f9fc;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: box-shadow 0.3s;
+        }
+        .form-control:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(0,123,255,0.5);
+        }
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        .btn-success:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Wrapper -->
+    <div class="container">
+        <!-- Page Heading -->
+        <h1>Edit User</h1>
+        
+        <!-- Edit User Form -->
+        <form action="/profile/update/<%= id %>" method="POST">
+            <div class="form-group">
+                <label for="nama_users">Nama</label>
+                <input type="text" class="form-control" id="nama_users" name="nama_users" value="<%= nama_users %>" required>
             </div>
-            <!-- /.container-fluid -->
-        </div>
-        <!-- End of Main Content -->
-<%- include ('../partials/__footer') %>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" value="<%= email %>" required>
+            </div>
+            <div class="form-group">
+                <label for="file_user">Foto</label>
+                <input type="file" class="form-control" id="file_user" name="file_user" value="<%= file_user %>" required>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Simpan</button>
+                <a href="./" class="btn btn-secondary ml-2">Kembali</a>
+            </div>
+        </form>
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

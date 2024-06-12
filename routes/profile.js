@@ -110,9 +110,10 @@ router.get('/edit/:id', async function(req, res, next){
             return res.redirect('/profile');
         }
 
-        res.render('profile/edit', {
+        res.render('common_profile/edit', {
             id: rows[0].id_users,
             nama_users: rows[0].nama_users,
+            file_user: rows[0].file_user,
             password: rows[0].password,
             email: rows[0].email,
             role: rows[0].role
@@ -126,14 +127,19 @@ router.get('/edit/:id', async function(req, res, next){
 router.post('/update/:id', async function(req, res, next){
     try {
         let id = req.params.id;
-        let { nama_users, jenis_kelamin, agama_users, alamat_users, email, password, role } = req.body;
+        const namaFileLama = rows[0].file_kelas;
+        if (filebaru && namaFileLama) {
+            const pathFileLama = path.join(__dirname, "../public/images/upload", namaFileLama);
+            fs.unlinkSync(pathFileLama);
+        }
+        let { nama_users, email, password, role } = req.body;
+        let file_user = filebaru || namaFileLama;
         let Data = {
             nama_users,
-            jenis_kelamin,
-            agama_users,
-            alamat_users,
+            file_user,
             email,
-            role 
+            role,
+            file_user
         };
 
         if (password) {
@@ -142,11 +148,11 @@ router.post('/update/:id', async function(req, res, next){
 
         await Model_Users.Update(id, Data);
         req.flash('success', 'Berhasil memperbarui data!');
-        res.redirect('/profile');
+        res.redirect('/profile/commonuser');
     } catch (error) {
         console.error("Error updating user:", error);
         req.flash('error', 'Terjadi kesalahan pada fungsi');
-        res.redirect('/profile');
+        res.redirect('/profile/commonuser');
     }
 });
 
