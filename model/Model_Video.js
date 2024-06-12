@@ -64,6 +64,18 @@ class Model_Video {
         });
     }
     
+    static async getByUserId(id_users) {
+        return new Promise((resolve, reject) => {
+            connection.query('SELECT * FROM video WHERE id_users = ? ORDER BY id_video DESC', [id_users], (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
+
     static async Update(id, Data) {
         return new Promise((resolve, reject) => {
             connection.query('update video set ? where id_video = ' + id, Data, function(err, result) {
