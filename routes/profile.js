@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Model_Users = require('../model/Model_Users');
+const Model_Video = require('../model/Model_Video');
 const Model_Activity = require('../model/Model_Activity');
 const bcrypt = require('bcrypt');
 
@@ -14,11 +15,16 @@ router.get('/', async function(req, res, next) {
         
         // Fetch activity data
         let activityRows = await Model_Activity.getByIdUsers(id);
+        let activityRows2 = await Model_Activity.getByIdUsers2(id);
+        let activityRows3 = await Model_Video.getAll();
+
 
         res.render('profile/profile', {
             data: userRows,
             email: email,
-            activities: activityRows
+            activities: activityRows,
+            activitiescls: activityRows2,
+            video: activityRows3
         });
     } catch (error) {
         console.error("Error fetching user or activity data:", error);

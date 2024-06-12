@@ -59,7 +59,13 @@
                                 <li><button onclick="changeVideo('<%= video[i].link_video %>','<%= video[i].id_video %>')" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(190, 190, 190); color: black;"><i class="fas fa-video"></i> <%= video[i].judul_video %></button></li>
                             <% } %>
                         </ul>
-                        <button type="button" class="btn btn-primary btn-sm me-3 rounded-pill" style="background-color: #00B0FF; color: white;">Gabung Kelas</button>
+                        <form action="/commonusers/gabung" method="post">
+                            <input type="hidden" name="id_kelas" value="<%= kelas.id_kelas %>"> <!-- Ganti 123 dengan id_kelas yang sesuai -->
+                            <button type="submit" class="btn btn-primary btn-sm me-3 rounded-pill" style="background-color: #00B0FF; color: white;">
+                                Gabung Kelas
+                            </button>
+                        </form>
+                        
                     </div>
                 </div>
             </div>
