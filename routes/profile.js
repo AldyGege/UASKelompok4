@@ -1,26 +1,34 @@
 const express = require('express');
 const router = express.Router();
 const Model_Users = require('../model/Model_Users');
+const Model_Activity = require('../model/Model_Activity');
 const bcrypt = require('bcrypt');
 
 router.get('/', async function(req, res, next) {
-    let id = req.session
     try {
         let id = req.session.userId;
-        let rows = await Model_Users.getId(id);
         let email = req.session.email;
+
+        // Fetch user data
+        let userRows = await Model_Users.getId(id);
+        
+        // Fetch activity data
+        let activityRows = await Model_Activity.getByIdUsers(id);
+
         res.render('profile/profile', {
-            data: rows,
-            email: email
+            data: userRows,
+            email: email,
+            activities: activityRows
         });
     } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("Error fetching user or activity data:", error);
         res.status(500).render('error', {
             message: 'Internal server error',
             error: error
         });
     }
 });
+
 
 router.get('/edit/:id', async function(req, res, next){
     try {

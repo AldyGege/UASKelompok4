@@ -38,10 +38,16 @@
 
         <div class="row gx-4 mb-4 mb-lg-5 justify-content-center">
             <!-- Video Utama -->
-            <div class="col-md-6">
-                <div class="video-container">
-                    <iframe id="main-video" src="https://www.youtube.com/embed/<%= video[0].link_video %>" frameborder="0" allowfullscreen></iframe>
+            <div class="col-md-6">                 
+                <div class="video-container" onclick="openVideoModal('VIDEO_ID')">
+                    <iframe id="main-video" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
                 </div>
+                <div class="text-center mt-2">
+                    <form id="Form" method="POST" action="/commonusers/tonton/:id" + globalVideoIDs >
+                        <input type="hidden" id="id_video" name="id_video" value="">
+                        <button id="Button" type="submit" class="btn btn-primary">Selesai</button>
+                    </form>
+                     </div>    
             </div>
             <!-- Daftar Lesson -->
             <div class="col-md-6">
@@ -50,7 +56,7 @@
                         <h5 class="fw-bold mb-3">Lessons</h5>
                         <ul class="lessons-list">
                             <% for(let i = 0; i < video.length; i++) { %>
-                                <li><button onclick="changeVideo('<%= video[i].link_video %>')" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(190, 190, 190); color: black;"><i class="fas fa-video"></i> <%= video[i].judul_video %></button></li>
+                                <li><button onclick="changeVideo('<%= video[i].link_video %>','<%= video[i].id_video %>')" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(190, 190, 190); color: black;"><i class="fas fa-video"></i> <%= video[i].judul_video %></button></li>
                             <% } %>
                         </ul>
                         <button type="button" class="btn btn-primary btn-sm me-3 rounded-pill" style="background-color: #00B0FF; color: white;">Gabung Kelas</button>
@@ -58,33 +64,40 @@
                 </div>
             </div>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         
         <script>
-            function goToCourseLessons() {
-                // Mengarahkan pengguna ke bagian "Course Lessons" di halaman yang sama
-                window.location.href = '#CourseLessons';
-            }
-        
-            function changeVideo(videoUrl) {
-                var videoId = getYouTubeVideoId(videoUrl);
-                var mainVideo = document.getElementById('main-video');
-                mainVideo.src = 'https://www.youtube.com/embed/' + videoId;
-            }
-        
-            function getYouTubeVideoId(url) {
-                var videoId = '';
-                var match = url.match(/[?&]v=([^&]+)/);
-                if (match) {
-                    videoId = match[1];
-                } else {
-                    // If URL is in the format of 'https://youtu.be/VIDEO_ID'
-                    match = url.match(/youtu\.be\/([^&]+)/);
-                    if (match) {
-                        videoId = match[1];
-                    }
-                }
-                return videoId;
-            }
+        var globalVideoIDs; // Variabel global untuk menyimpan id_video dari video yang dipilih
+
+function changeVideo(videoUrl,idvideo) {
+    // Menetapkan nilai globalVideoIDs
+    globalVideoIDs = idvideo;
+    document.getElementById('id_video').value = idvideo;
+    var videoId = getYouTubeVideoId(videoUrl);
+    var mainVideo = document.getElementById('main-video');
+    mainVideo.src = 'https://www.youtube.com/embed/' + videoId;
+    $('#videoModal').modal('show'); // Menampilkan modal saat video berubah
+}
+
+function openVideoModal(videoId) {
+    $('#videoModal').modal('show'); // Menampilkan modal saat video diklik
+}
+
+    function getYouTubeVideoId(url) {
+      var videoId = '';
+      var match = url.match(/[?&]v=([^&]+)/);
+      if (match) {
+        videoId = match[1];
+      } else {
+        // Jika URL dalam format 'https://youtu.be/VIDEO_ID'
+        match = url.match(/youtu\.be\/([^&]+)/);
+        if (match) {
+          videoId = match[1];
+        }
+      }
+      return videoId;
+    }
         </script>
         
 
