@@ -97,6 +97,23 @@ router.post('/tonton/:id', async function (req, res, next) {
   }
 });
 
+router.post('/gabung', async function (req, res, next) {
+  try {
+    let { id_kelas } = req.body; 
+    let Data = {
+      id_users: req.session.userId,
+      id_kelas: id_kelas,
+    };
+    await Model_Activity.create(Data);
+    req.flash("success", "Berhasil menyimpan data");
+    res.redirect("/kategori_pembelajaran");
+  } catch (error) {
+    console.log(error); // Menampilkan pesan kesalahan ke konsol
+    req.flash("error", "Gagal menyimpan data");
+    res.redirect("/kategori_pembelajaran");
+  }
+});
+
 
 router.get('/course/:id', async function (req, res, next) {
   try {

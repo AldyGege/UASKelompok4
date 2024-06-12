@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Model_Users = require('../model/Model_Users');
+const Model_Video = require('../model/Model_Video');
 const Model_Activity = require('../model/Model_Activity');
 const Model_Kategori_Pembelajaran = require('../model/Model_Kategori');
 const Model_Alur_Belajar = require('../model/Model_Alur_Belajar');
@@ -23,7 +24,11 @@ router.get('/', async function(req, res, next) {
         
         // Fetch activity data
         let activityRows = await Model_Activity.getByIdUsers(id);
+        let activityRows2 = await Model_Activity.getByIdUsers2(id);
+        let activityRows3 = await Model_Video.getAll();
 
+
+<<<<<<< HEAD
         // Redirect based on user level
         let userLevel = userRows[0].role;
         if (userLevel == 1) {
@@ -50,6 +55,15 @@ router.get('/', async function(req, res, next) {
                 activities: activityRows
             });
         }
+=======
+        res.render('profile/profile', {
+            data: userRows,
+            email: email,
+            activities: activityRows,
+            activitiescls: activityRows2,
+            video: activityRows3
+        });
+>>>>>>> 528a3baecb620329968d8726d84e86d0e856f17e
     } catch (error) {
         console.error("Error fetching user or activity data:", error);
         res.status(500).render('error', {

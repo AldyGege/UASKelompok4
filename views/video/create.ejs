@@ -35,6 +35,7 @@
 <body>
   <div class="form-container">
     <form action="/video/store" method="POST">
+      <input type="hidden" name="id_users" value="<%= id_users %>">
       <div class="mb-3">
         <label for="judul_video" class="form-label">Judul Video</label>
         <input type="text" class="form-control" id="judul_video" name="judul_video" required>
