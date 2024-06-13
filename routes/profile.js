@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const fs = require("fs");
+const path = require("path")
+const multer = require('multer');
 const Model_Users = require('../model/Model_Users');
 const Model_Video = require('../model/Model_Video');
 const Model_Activity = require('../model/Model_Activity');
@@ -7,6 +10,16 @@ const Model_Kategori_Pembelajaran = require('../model/Model_Kategori');
 const Model_Alur_Belajar = require('../model/Model_Alur_Belajar');
 const bcrypt = require('bcrypt');
 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, "public/images/upload");
+    },
+    filename: (req, file, cb) => {
+      console.log(file);
+      cb(null, Date.now() + path.extname(file.originalname));
+    },
+  });
+  const upload = multer({ storage: storage });
 
 router.get('/user', async function(req, res, next) {
     try {
@@ -118,35 +131,63 @@ router.get('/edit/:id', async function(req, res, next){
             return res.redirect('/profile');
         }
 
-        res.render('common_profile/edit', {
-            id: rows[0].id_users,
-            nama_users: rows[0].nama_users,
-            file_user: rows[0].file_user,
-            password: rows[0].password,
-            email: rows[0].email,
-            role: rows[0].role
-        });
+        // Check user role
+        let userLevel = userRows[0].role;
+        if (userLevel == 1) {
+            res.render('admin_profile/edit', {
+                id_users: id,
+                nama_users: userRows[0].nama_users,
+                email: userRows[0].email,
+                file_user: userRows[0].file_user,
+                
+            });
+        } else if (userLevel == 2) {
+            res.render('mentor_profile/edit', {
+                id_users: id,
+                nama_users: userRows[0].nama_users,
+                email: userRows[0].email,
+                file_user: userRows[0].file_user,
+            });
+        } else {
+            res.render('common_profile/edit', {
+                id_users: id,
+                nama_users: userRows[0].nama_users,
+                email: userRows[0].email,
+                file_user: userRows[0].file_user,
+            });
+        }
     } catch (error) {
         console.error("Error fetching user for edit:", error);
         res.status(500).send("Internal Server Error");
     }
 });
 
-router.post('/update/:id', async function(req, res, next){
+router.post('/update/:id', upload.single("file_user"), async function (req, res, next) {
     try {
-        let id = req.params.id;
-        const namaFileLama = rows[0].file_kelas;
+        const id = req.params.id;
+        const rows = await Model_Users.getId(id);
+        if (!rows.length) {
+            req.flash('error', 'User not found');
+            return res.redirect('/profile');
+        }
+        
+        const filebaru = req.file ? req.file.filename : null;
+        const namaFileLama = rows[0].file_user;
+
         if (filebaru && namaFileLama) {
             const pathFileLama = path.join(__dirname, "../public/images/upload", namaFileLama);
-            fs.unlinkSync(pathFileLama);
+            try {
+                await fs.unlink(pathFileLama);
+            } catch (err) {
+                console.error(`Error deleting old file: ${err.message}`);
+            }
         }
-        let { nama_users, email, password, role } = req.body;
-        let file_user = filebaru || namaFileLama;
-        let Data = {
+
+        const { nama_users, email } = req.body;
+        const file_user = filebaru || namaFileLama;
+        const Data = {
             nama_users,
-            file_user,
             email,
-            role,
             file_user
         };
 
@@ -154,22 +195,27 @@ router.post('/update/:id', async function(req, res, next){
         await Model_Users.Update(id, Data);
 
         // Fetch user role after update
-        let userRows = await Model_Users.getId(id);
+        const userRows = await Model_Users.getId(id);
         if (!userRows.length) {
-            req.flash('error', 'User not found');
+            req.flash('error', 'User not found after update');
             return res.redirect('/profile');
         }
 
-        await Model_Users.Update(id, Data);
+        const userLevel = userRows[0].role;
         req.flash('success', 'Berhasil memperbarui data!');
-        res.redirect('/profile/commonuser');
+        if (userLevel == 1) {
+            return res.redirect('/profile/user');
+        } else if (userLevel == 2) {
+            return res.redirect('/profile/user');
+        } else {
+            return res.redirect('/profile/commonuser');
+        }
     } catch (error) {
         console.error("Error updating user:", error);
         req.flash('error', 'Terjadi kesalahan pada fungsi');
-        res.redirect('/profile/commonuser');
+        return res.redirect('/profile');
     }
 });
-
 
 router.post('/delete/:id', async function(req, res, next){
     try {

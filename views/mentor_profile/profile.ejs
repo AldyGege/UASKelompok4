@@ -1,5 +1,4 @@
-<%- include('../partials/katogori_pembelajaran/_head.ejs') %>
-
+<%- include('../partials/mentor_profile/_head.ejs') %>
 <style>
     .rounded-circle {
         border-radius: 50%;
@@ -9,14 +8,12 @@
         height: 250px; /* Atur tinggi sesuai kebutuhan */
     }
 </style>
-
-
-<%- include('../partials/katogori_pembelajaran/_navbar.ejs') %>
+<%- include('../partials/mentor_profile/_navbar.ejs') %>
 
 <div class="container my-5">
     <!-- Judul -->
     <div class="text-center mb-4" style="margin-top: 80px;">
-        <h2>User Profile</h2>
+        <h2>Tutor Profile</h2>
     </div>
     <!-- Profile Page Content -->
     <div class="container-fluid mt-5">
@@ -55,9 +52,9 @@
             <!-- Activities Section -->
             <div class="row mt-5">
                 <div class="col-12">
-                    <h3>Your Last Video</h3>
+                    <h3>Activities</h3>
                 </div>
-                <% activities.slice(0, 3).forEach(function(activity) { %>
+                <% activities.forEach(function(activity) { %>
                     <div class="col-md-4 mt-3">
                         <div class="card shadow-lg">
                             <div class="card-body">
@@ -67,39 +64,12 @@
                         </div>
                     </div>
                 <% }); %>
-            </div>  
-            
-            <div class="row mt-5">
-                <div class="col-12">
-                    <h3>Your Class</h3>
-                </div>
-                <div class="col-md-4 mt-3">
-                    <% activitiescls.forEach(function(activity) { %>
-                        <a href="/commonusers/course/<%= activity.id_kelas %>" class="card-link">
-                            <div class="card shadow-lg mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title"><%= activity.judul %></h5>
-                                    <div class="list-group list-group-flush">
-                                        <ul>
-                                            <% video.forEach(function(videos) { %>
-                                                <% if (videos.id_kelas === activity.id_kelas) { %>
-                                                    <li class="list-group-item"><%= videos.judul_video %></li>
-                                                <% } %>
-                                            <% }); %>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    <% }); %>
-                </div>
-                
             </div>
-            <div class="row mt-5"></div>
+        </div>
         <!-- /Content Row -->
     </div>
     <!-- /Profile Page Content -->
 </div>
 
-<%- include('../partials/katogori_pembelajaran/_contact.ejs') %>
-<%- include('../partials/katogori_pembelajaran/_footer.ejs') %>
+<%- include('../partials/mentor_profile/_contact.ejs') %>
+<%- include('../partials/mentor_profile/_footer.ejs') %>
