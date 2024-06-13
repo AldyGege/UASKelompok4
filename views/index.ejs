@@ -13,7 +13,6 @@
                     We're a dedicated educational platform committed to providing quality education access to everyone. With a curriculum focusing on skill development, interactive learning, and easy accessibility.
                 </h2>
                 <div class="btn-group" role="group" aria-label="Register Buttons">
-                    <!-- <a class="btn btn-outline-black" href="register_tutor">Daftar Mentor</a> -->
                     <a class="btn btn-outline-black" href="register_user">Daftar</a>
                 </div>
             </div>
@@ -35,16 +34,13 @@
                 <% classes.forEach(classItem => { %>
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                            <div class="card-body d-flex align-items-center" onclick="handleClassClick('<%= classItem.id_kelas %>')" style="cursor: pointer;" >
+                            <div class="card-body d-flex align-items-center" onclick="handleClassClick('<%= classItem.id_kelas %>')" style="cursor: pointer;">
                                 <img class="img-fluid mb-3 rounded-circle me-3" src="/images/upload/<%= classItem.file_kelas %>" alt="Class Image" style="width: 100px; height: 100px;">
                                 <div>
                                     <h4 class="card-title" style="font-weight: bold;"><%= classItem.judul %></h4>
-                                    <!-- <p class="card-text"><%= classItem.deskripsi %></p> -->
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <!-- <p class="card-text"><%= classItem.deskripsi %></p> -->
-                            </div>
+                            <div class="card-body"></div>
                         </div>
                     </div>
                 <% }) %>
@@ -84,43 +80,23 @@
     </div>
 </section>
 
-<!-- Signup-->
-<section class="signup-section" id="signup">
-    <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5">
-            <div class="col-md-10 col-lg-8 mx-auto text-center">
-                <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
-                <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
-                <form action="https://formspree.io/f/xvoeeodb" method="POST" class="form-signup" id="contactForm">
-                    <div class="mb-3">
-                        <label for="emailAddress" class="form-label text-white">Your email:</label>
-                        <input class="form-control" id="emailAddress" type="email" name="email" placeholder="Enter email address..." aria-label="Enter email address..." required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="message" class="form-label text-white">Your message:</label>
-                        <textarea class="form-control" id="message" name="message" placeholder="Enter your message..." aria-label="Enter your message..." required></textarea>
-                    </div>
-                    <div class="d-grid">
-                        <button class="btn btn-primary" type="submit">Send</button>
-                    </div>
-                    <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:required">An email is required.</div>
-                    <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:email">Email is not valid.</div>
-                    <div class="d-none" id="submitSuccessMessage">
-                        <div class="text-center mb-3 mt-2 text-white">
-                            <div class="fw-bolder">Form submission successful!</div>
-                            To activate this form, sign up at
-                            <br />
-                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                        </div>
-                    </div>
-                    <div class="d-none" id="submitErrorMessage">
-                        <div class="text-center text-danger mb-3 mt-2">Error sending message!</div>
-                    </div>
-                </form>
+<!-- Register Mentor Section -->
+<section class="masthead bg-light" id="mentor">
+    <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+        <div class="d-flex justify-content-center">
+            <div class="text-center text-black">
+                <h2 class="text-center mb-4">Join Us as a Mentor</h2>
+                <h3 class="text-black mx-auto mt-4 mb-5">
+                    We're always looking for experienced professionals to help guide and educate our students. Become a mentor and make a difference by sharing your knowledge and skills.
+                </h3>
+                <div class="btn-group mb-5" role="group" aria-label="Register Mentor Button">
+                    <a class="btn btn-outline-black" href="register_tutor">Daftar Mentor</a>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
 
 <!-- Contact-->
 <%- include('partials/common/_contact') %>
