@@ -1,10 +1,22 @@
-<%- include('../partials/mentor_profile/_head.ejs') %>
-<%- include('../partials/mentor_profile/_navbar.ejs') %>
+<%- include('../partials/katogori_pembelajaran/_head.ejs') %>
+
+<style>
+    .rounded-circle {
+        border-radius: 50%;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75); /* Mengatur bayangan: horisontal-offset vertical-offset blur spread color */
+        object-fit: cover; /* Mengatasi gambar yang terlalu panjang atau lebar */
+        width: 250px; /* Atur lebar sesuai kebutuhan */
+        height: 250px; /* Atur tinggi sesuai kebutuhan */
+    }
+</style>
+
+
+<%- include('../partials/katogori_pembelajaran/_navbar.ejs') %>
 
 <div class="container my-5">
     <!-- Judul -->
     <div class="text-center mb-4" style="margin-top: 80px;">
-        <h2>Tutor Profile</h2>
+        <h2>User Profile</h2>
     </div>
     <!-- Profile Page Content -->
     <div class="container-fluid mt-5">
@@ -12,7 +24,7 @@
         <div class="container mt-5">
             <div class="row mt-5">
                 <div class="col-4 text-center">
-                    <img src="/images/profile.png" width="250" alt="Nama Gambar" class="img-fluid">
+                    <img src="/images/upload/<%= data[0].file_user %>" width="250" alt="Nama Gambar" class="img-fluid rounded-circle">
                 </div>
                 <div class="col-8">
                     <div class="card shadow-lg mb-4 border-left-success">
@@ -43,9 +55,9 @@
             <!-- Activities Section -->
             <div class="row mt-5">
                 <div class="col-12">
-                    <h3>Activities</h3>
+                    <h3>Your Last Video</h3>
                 </div>
-                <% activities.forEach(function(activity) { %>
+                <% activities.slice(0, 3).forEach(function(activity) { %>
                     <div class="col-md-4 mt-3">
                         <div class="card shadow-lg">
                             <div class="card-body">
@@ -55,12 +67,39 @@
                         </div>
                     </div>
                 <% }); %>
+            </div>  
+            
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h3>Your Class</h3>
+                </div>
+                <div class="col-md-4 mt-3">
+                    <% activitiescls.forEach(function(activity) { %>
+                        <a href="/commonusers/course/<%= activity.id_kelas %>" class="card-link">
+                            <div class="card shadow-lg mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= activity.judul %></h5>
+                                    <div class="list-group list-group-flush">
+                                        <ul>
+                                            <% video.forEach(function(videos) { %>
+                                                <% if (videos.id_kelas === activity.id_kelas) { %>
+                                                    <li class="list-group-item"><%= videos.judul_video %></li>
+                                                <% } %>
+                                            <% }); %>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    <% }); %>
+                </div>
+                
             </div>
-        </div>
+            <div class="row mt-5"></div>
         <!-- /Content Row -->
     </div>
     <!-- /Profile Page Content -->
 </div>
 
-<%- include('../partials/mentor_profile/_contact.ejs') %>
-<%- include('../partials/mentor_profile/_footer.ejs') %>
+<%- include('../partials/katogori_pembelajaran/_contact.ejs') %>
+<%- include('../partials/katogori_pembelajaran/_footer.ejs') %>

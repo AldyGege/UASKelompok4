@@ -28,6 +28,7 @@ router.get('/', async function (req, res, next) {
           title: "Users Home",
           email: Data[0].email,
           nama_users: Data[0].nama_users,
+          file_user:Data[0].file_user,
           role: req.session.role,
           alat: alat,
           alur_belajar: alur_belajar,
@@ -91,11 +92,11 @@ router.post('/tonton/:id', async function (req, res, next) {
     };
     await Model_Activity.create(Data);
     req.flash("success", "Berhasil menyimpan data");
-    res.redirect("/kategori_pembelajaran");
+    res.redirect("/profile/commonuser");
   } catch (error) {
     console.log(error); // Menampilkan pesan kesalahan ke konsol
     req.flash("error", "Gagal menyimpan data");
-    res.redirect("/kategori_pembelajaran");
+    res.redirect("/profile/commonuser");
   }
 });
 
@@ -108,11 +109,11 @@ router.post('/gabung', async function (req, res, next) {
     };
     await Model_Activity.create(Data);
     req.flash("success", "Berhasil menyimpan data");
-    res.redirect("/kategori_pembelajaran");
+    res.redirect("/profile/commonuser");
   } catch (error) {
     console.log(error); // Menampilkan pesan kesalahan ke konsol
     req.flash("error", "Gagal menyimpan data");
-    res.redirect("/kategori_pembelajaran");
+    res.redirect("/profile/commonuser");
   }
 });
 

@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-
+const fs = require("fs");
+const path = require("path")
+const multer = require('multer');
 const bcrypt = require('bcrypt');
 const Model_Alat = require("../model/Model_Alat.js");
 const Model_Users = require("../model/Model_Users.js");
@@ -60,16 +62,27 @@ router.get('/course', function(req, res, next) {
 //   let nama_users;
 //   res.render('users/detail_common/alur_belajar', { nama_users: nama_users });
 // });
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images/upload");
+  },
+  filename: (req, file, cb) => {
+    console.log(file);
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
 
+const upload = multer({ storage: storage });
 
-router.post('/saveusers', async (req, res) => {
-  let { nama_users, email, password, role } = req.body;
+router.post('/saveusers',upload.single("file_user"),async (req, res) => {
+  let { nama_users, email, password, role} = req.body;
   try {
       let enkripsi = await bcrypt.hash(password, 10);
       let Data = {
           nama_users,
           email,
           role,
+          file_user:req.file.filename,
           password: enkripsi,
       };
       await Model_Users.Store(Data);

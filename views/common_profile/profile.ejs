@@ -1,5 +1,22 @@
+<<<<<<< HEAD
 <%- include('../partials/profile/_head.ejs') %>
 <%- include('../partials/profile/_navbar.ejs') %>
+=======
+<%- include('../partials/katogori_pembelajaran/_head.ejs') %>
+
+<style>
+    .rounded-circle {
+        border-radius: 50%;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75); /* Mengatur bayangan: horisontal-offset vertical-offset blur spread color */
+        object-fit: cover; /* Mengatasi gambar yang terlalu panjang atau lebar */
+        width: 250px; /* Atur lebar sesuai kebutuhan */
+        height: 250px; /* Atur tinggi sesuai kebutuhan */
+    }
+</style>
+
+
+<%- include('../partials/katogori_pembelajaran/_navbar.ejs') %>
+>>>>>>> 8a9a06af758326d49d31ae1fcc8172e93b09ee44
 
 <div class="container my-5">
     <!-- Judul -->
@@ -12,7 +29,7 @@
         <div class="container mt-5">
             <div class="row mt-5">
                 <div class="col-4 text-center">
-                    <img src="/images/profile.png" width="250" alt="Nama Gambar" class="img-fluid">
+                    <img src="/images/upload/<%= data[0].file_user %>" width="250" alt="Nama Gambar" class="img-fluid rounded-circle">
                 </div>
                 <div class="col-8">
                     <div class="card shadow-lg mb-4 border-left-success">
@@ -89,5 +106,10 @@
     <!-- /Profile Page Content -->
 </div>
 
+<<<<<<< HEAD
 <%- include('../partials/profile/_contact.ejs') %>
 <%- include('../partials/profile/_footer.ejs') %>
+=======
+<%- include('../partials/katogori_pembelajaran/_contact.ejs') %>
+<%- include('../partials/katogori_pembelajaran/_footer.ejs') %>
+>>>>>>> 8a9a06af758326d49d31ae1fcc8172e93b09ee44

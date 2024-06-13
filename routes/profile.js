@@ -118,27 +118,14 @@ router.get('/edit/:id', async function(req, res, next){
             return res.redirect('/profile');
         }
 
-        // Check user role
-        let userLevel = userRows[0].role;
-        if (userLevel == 1) {
-            res.render('admin_profile/edit', {
-                id_users: id,
-                nama_users: userRows[0].nama_users,
-                email: userRows[0].email,
-            });
-        } else if (userLevel == 2) {
-            res.render('mentor_profile/edit', {
-                id_users: id,
-                nama_users: userRows[0].nama_users,
-                email: userRows[0].email,
-            });
-        } else {
-            res.render('common_profile/edit', {
-                id_users: id,
-                nama_users: userRows[0].nama_users,
-                email: userRows[0].email,
-            });
-        }
+        res.render('common_profile/edit', {
+            id: rows[0].id_users,
+            nama_users: rows[0].nama_users,
+            file_user: rows[0].file_user,
+            password: rows[0].password,
+            email: rows[0].email,
+            role: rows[0].role
+        });
     } catch (error) {
         console.error("Error fetching user for edit:", error);
         res.status(500).send("Internal Server Error");
@@ -148,10 +135,19 @@ router.get('/edit/:id', async function(req, res, next){
 router.post('/update/:id', async function(req, res, next){
     try {
         let id = req.params.id;
-        let { nama_users, email } = req.body;
+        const namaFileLama = rows[0].file_kelas;
+        if (filebaru && namaFileLama) {
+            const pathFileLama = path.join(__dirname, "../public/images/upload", namaFileLama);
+            fs.unlinkSync(pathFileLama);
+        }
+        let { nama_users, email, password, role } = req.body;
+        let file_user = filebaru || namaFileLama;
         let Data = {
             nama_users,
-            email
+            file_user,
+            email,
+            role,
+            file_user
         };
 
         // Update data
@@ -164,21 +160,13 @@ router.post('/update/:id', async function(req, res, next){
             return res.redirect('/profile');
         }
 
-        let userLevel = userRows[0].role;
-        if (userLevel == 1) {
-            req.flash('success', 'Berhasil memperbarui data!');
-            return res.redirect('/profile/user');
-        } else if (userLevel == 2) {
-            req.flash('success', 'Berhasil memperbarui data!');
-            return res.redirect('/profile/user');
-        } else {
-            req.flash('success', 'Berhasil memperbarui data!');
-            return res.redirect('/profile/commonuser');
-        }
+        await Model_Users.Update(id, Data);
+        req.flash('success', 'Berhasil memperbarui data!');
+        res.redirect('/profile/commonuser');
     } catch (error) {
         console.error("Error updating user:", error);
         req.flash('error', 'Terjadi kesalahan pada fungsi');
-        res.redirect('/profile');
+        res.redirect('/profile/commonuser');
     }
 });
 

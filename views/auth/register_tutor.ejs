@@ -100,7 +100,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <form action="/saveusers" method="POST">
+        <form action="/saveusers" method="POST" enctype="multipart/form-data">
           <div class="mb-3">
             <label class="form-label">Nama User</label>
             <input type="text" name="nama_users" class="form-control" placeholder="Enter your name" required>
@@ -108,6 +108,10 @@
           <div class="mb-3">
             <label class="form-label">Email</label>
             <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Foto</label>
+            <input type="file" name="file_user" class="form-control" placeholder="Enter your email" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Password</label>
