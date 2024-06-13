@@ -13,7 +13,7 @@
                 <div class="Page text-lg-left" style="margin-right: 20px; font-size: 2rem;">
                     <p class="fw-bold">Katalog Kelas</p>
                 </div>                                  
-                <p class="text-black-50 mb-0">BuildWithAngga menyediakan kelas UI/UX</p>
+                <p class="text-black-50 mb-0">BuildWithTI menyediakan kelas UI/UX</p>
                 <p class="text-black-50 mb-0">design & Web Development untuk pemula ke mahir</p>
             </div>
         </div>
@@ -24,14 +24,14 @@
         <!-- Project Two Row-->
         <div class="row gx-4 mb-4 mb-lg-5 justify-content-center">
             <div class="col-12 mb-4">
-                <p class="fw-bold" style="font-size: 1.5rem;">Popular Categories</p>
+                <p class="fw-bold" style="font-size: 1.5rem;">List Class</p>
             </div>
-            <% alur_belajar.forEach(function(item) { %>
+            <% kelas_pembelajaran.forEach(function(item) { %>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body d-flex align-items-center">
-                            <img class="img-fluid rounded-circle" src="/images/upload/<%= item.file_alur_belajar %>" alt="<%= item.alur_belajar %>" style="width: 80px; height: 80px; margin-right: 15px;">
-                            <h5 class="card-title mb-0" style="font-weight: bold; font-size: 1rem;"><%= item.alur_belajar %></h5>
+                            <img class="img-fluid rounded-circle" src="/images/upload/<%= item.file_kelas %>" alt="<%= item.judul %>" style="width: 80px; height: 80px; margin-right: 15px;">
+                            <h5 class="card-title mb-0" style="font-weight: bold; font-size: 1rem;"><%= item.judul %></h5>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
         <!-- Project Three Row-->
         <div class="row gx-4 mb-4 mb-lg-5 justify-content-center">
             <div class="col-12 mb-4">
-                <p class="fw-bold" style="font-size: 1.5rem;">Popular Tools</p>
+                <p class="fw-bold" style="font-size: 1.5rem;">List Tools</p>
             </div>
             <% alat.forEach(function(item) { %>
                 <div class="col-lg-3 col-md-6 mb-4">
@@ -127,112 +127,49 @@
 
         <!-- Ruang antara  Project Three  dan Project Four -->
         <div class="mb-4 mb-7"></div>
-
-        <!-- Project Four Row -->
-        <div class="row gx-4 mb-4 mb-lg-5 justify-content-center">
-            <div class="col-12 mb-4">
-                <p class="fw-bold" style="font-size: 1.5rem;">Terbaru Dirilis</p>
-            </div>
-            <!-- Card 1 -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="position-relative">
-                        <iframe class="w-100" height="200" src="https://youtu.be/G1wf2UsksuU?si=VaUndstIFmnMFRL8" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">UI UX Desain Web</h5>
-                        <p class="card-text">Rp. 500.000</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 2 -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="position-relative">
-                        <iframe class="w-100" height="200" src="https://www.youtube.com/embed/videoid2" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Website Development</h5>
-                        <p class="card-text">Rp. 750.000</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="position-relative">
-                        <iframe class="w-100" height="200" src="https://www.youtube.com/embed/videoid3" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Mobile Development</h5>
-                        <p class="card-text">Rp. 900.000</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 4 -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="position-relative">
-                        <iframe class="w-100" height="200" src="https://www.youtube.com/embed/videoid4" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Data Analyst</h5>
-                        <p class="card-text">Rp. 1.200.000</p>
-                    </div>
-                </div>
-            </div>
+        <div class="col-12 mb-4">
+            <p class="fw-bold" style="font-size: 1.5rem;">Rilis Terbaru</p>
         </div>
-        <!-- Akhir Project Four Row -->
-
-
+<!-- Project Four Row -->
+<div class="row">
+    <% if (videos && videos.length > 0) { %>
+        <% videos.slice(0, 3).forEach(function(video, index) { %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title"><%= video.judul_video %></h5>
+              <div class="video-container">
+                <% if (video.link_video.includes("youtube.com") || video.link_video.includes("youtu.be")) { %>
+                  <iframe width="100%" height="200" src="https://www.youtube.com/embed/<%= extractYouTubeId(video.link_video) %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <% } else { %>
+                  <video width="100%" height="200" controls>
+                    <source src="<%= video.link_video %>" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                <% } %>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+      <% }); %>
+    <% } else { %>
+      <div class="col-12">
+        <p class="text-center">Tidak ada video yang tersedia.</p>
+      </div>
+    <% } %>
+  </div>
+</div>
     </div>
 </section>
-
-
+<script>
+    function extractYouTubeId(url) {
+      var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+      var match = url.match(regExp);
+      return (match && match[7].length == 11) ? match[7] : false;
+    }
+  </script>
 <!-- Signup-->
-<section class="signup-section" id="signup">
-    <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5">
-            <div class="col-md-10 col-lg-8 mx-auto text-center">
-                <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
-                <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- * * SB Forms Contact Form * *-->
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- This form is pre-integrated with SB Forms.-->
-                <!-- To make this form functional, sign up at-->
-                <!-- https://startbootstrap.com/solution/contact-forms-->
-                <!-- to get an API token!-->
-                <form class="form-signup" id="contactForm" data-sb-form-api-token="API_TOKEN">
-                    <!-- Email address input-->
-                    <div class="row input-group-newsletter">
-                        <div class="col"><input class="form-control" id="emailAddress" type="email" placeholder="Enter email address..." aria-label="Enter email address..." data-sb-validations="required,email" /></div>
-                        <div class="col-auto"><button class="btn btn-primary disabled" id="submitButton" type="submit">Notify Me!</button></div>
-                    </div>
-                    <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:required">An email is required.</div>
-                    <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:email">Email is not valid.</div>
-                    <!-- Submit success message-->
-                    <!---->
-                    <!-- This is what your common will see when the form-->
-                    <!-- has successfully submitted-->
-                    <div class="d-none" id="submitSuccessMessage">
-                        <div class="text-center mb-3 mt-2 text-white">
-                            <div class="fw-bolder">Form submission successful!</div>
-                            To activate this form, sign up at
-                            <br />
-                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                        </div>
-                    </div>
-                    <!-- Submit error message-->
-                    <!---->
-                    <!-- This is what your common will see when there is-->
-                    <!-- an error submitting the form-->
-                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3 mt-2">Error sending message!</div></div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
 <!-- Contact-->
 <%- include('../../partials/common/_contact') %>
 

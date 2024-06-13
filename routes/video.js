@@ -4,7 +4,7 @@ const Model_Video = require("../model/Model_Video.js");
 const Model_Users = require("../model/Model_Users.js");
 const Model_Kelas = require("../model/Model_Kelas.js");
 
-// Route to display all videos for the logged-in user
+
 router.get("/", async function (req, res, next) {
   try {
     let id = req.session.userId;
@@ -13,7 +13,7 @@ router.get("/", async function (req, res, next) {
     if (userData.length > 0) {
       let rows = await Model_Video.getByUserId(id);
 
-      // Extract YouTube ID function
+      // Fungsi untuk mengekstrak ID YouTube dari URL
       function extractYouTubeId(url) {
         var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
         var match = url.match(regExp);
@@ -22,7 +22,7 @@ router.get("/", async function (req, res, next) {
 
       res.render("video/video", {
         data: rows,
-        extractYouTubeId: extractYouTubeId
+        extractYouTubeId: extractYouTubeId // Mengirimkan fungsi extractYouTubeId ke view
       });
     } else {
       res.redirect("/login");
@@ -32,6 +32,7 @@ router.get("/", async function (req, res, next) {
     res.redirect("/login");
   }
 });
+
 
 // Route to display the form for creating a new video
 router.get("/create", async function (req, res, next) {
@@ -129,5 +130,24 @@ router.get("/delete/:id", async function (req, res) {
     res.redirect("/video");
   }
 });
+
+// Route to handle the update of video status
+router.post("/updateId/:id", async function (req, res) {
+  try {
+    let id = req.params.id;
+    let { status } = req.body; // Ambil nilai status dari body request
+    let data = {
+      status: status // Assign nilai status dari body request ke dalam objek data
+    };
+    await Model_Video.Update(id, data); // Panggil fungsi Update dari Model_Video untuk meng-update status
+    req.flash("success", "Berhasil mengubah status video");
+    res.redirect("/video");
+  } catch (error) {
+    console.log(error);
+    req.flash("error", "Gagal mengubah status video");
+    res.redirect("/video");
+  }
+});
+
 
 module.exports = router;

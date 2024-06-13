@@ -16,6 +16,7 @@ router.get('/', async function (req, res, next) {
         title: "Users Home",
         email: Data[0].email,
         nama_users: Data[0].nama_users,
+        file_user: Data[0].file_user,
         role: req.session.role
       });
     }

@@ -81,9 +81,17 @@
                                         <ul>
                                             <% video.forEach(function(videos) { %>
                                                 <% if (videos.id_kelas === activity.id_kelas) { %>
-                                                    <li class="list-group-item"><%= videos.judul_video %></li>
+                                                    <li class="list-group-item">
+                                                        <% let isMatched = false; %>
+                                                        <% activitiescls.forEach(activity => { %>
+                                                            <% if (activity.id_video === videos.id_video && activity.id_users === id) { %>
+                                                                <% isMatched = true; %>
+                                                            <% } %>
+                                                        <% }); %>
+                                                        <%= videos.judul_video %> <%= isMatched ? 'sudah' : '' %>
+                                                    </li>
                                                 <% } %>
-                                            <% }); %>
+                                            <% }); %>                                                                                                                      
                                         </ul>
                                     </div>
                                 </div>

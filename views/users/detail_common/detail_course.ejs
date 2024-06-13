@@ -1,35 +1,18 @@
 <%- include('../../partials/common/_head.ejs') %>
 
 <!-- Navigation-->
-<%- include('../../partials/common/_navbar') %>
+<%- include('../../partials/users/_navbarcourse') %>
 
 <!-- Projects-->
 <section class="projects-section" id="projects">
     <div class="container px-4 px-lg-5">
         <!-- Featured Project Row-->
         <div class="gx-0 mb-4 mb-lg-5 text-center">
-                <div class="Page text-lg-left text-black" style="margin-right: 20px;font-size: 2rem;">
-                    <p><%= kelas.judul %></p>
-                    <p>Rp <%= kelas.harga_kelas %></p>
-                </div>
-                <p class="text-black mb-0 mt-5">Learn how to build a real project from scratch</p>
-                <div class="row mt-5">
-                    <div class="col">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
-                            <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
-                            <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043z"/>
-                        </svg>
-                        harga kelas
-                    </div>
-                    <div class="col">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
-                            <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
-                            <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043z"/>
-                        </svg>
-                        harga kelas
-                    </div>
-                </div>
-
+            <div class="Page text-lg-left text-black" style="margin-right: 20px;font-size: 2rem;">
+                <p><%= kelas.judul %></p>
+                <!-- <p>Rp <%= kelas.harga_kelas %></p> -->
+            </div>
+            <p class="text-black mb-0 mt-5">Learn how to build a real project from scratch</p>
         </div>
         <!-- Akhir Featured Project Row-->
 
@@ -38,16 +21,16 @@
 
         <div class="row gx-4 mb-4 mb-lg-5 justify-content-center">
             <!-- Video Utama -->
-            <div class="col-md-6">                 
+            <div class="col-md-6">
                 <div class="video-container" onclick="openVideoModal('VIDEO_ID')">
                     <iframe id="main-video" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <div class="text-center mt-2">
-                    <form id="Form" method="POST" action="/commonusers/tonton/:id" + globalVideoIDs >
+                    <form id="Form" method="POST" action="/commonusers/tonton/:id" + globalVideoIDs>
                         <input type="hidden" id="id_video" name="id_video" value="">
-                        <button id="Button" type="submit" class="btn btn-primary">Selesai</button>
+                        <button id="Button" type="submit" class="btn btn-primary" style="float: right;">Selesai</button>
                     </form>
-                     </div>    
+                </div>
             </div>
             <!-- Daftar Lesson -->
             <div class="col-md-6">
@@ -56,126 +39,119 @@
                         <h5 class="fw-bold mb-3">Lessons</h5>
                         <ul class="lessons-list">
                             <% for(let i = 0; i < video.length; i++) { %>
-                                <li><button onclick="changeVideo('<%= video[i].link_video %>','<%= video[i].id_video %>')" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(190, 190, 190); color: black;"><i class="fas fa-video"></i> <%= video[i].judul_video %></button></li>
+                                <% if(nama_users !== '' || video[i].status === 'yes') { %>
+                                    <li>
+                                        <button onclick="changeVideo('<%= video[i].link_video %>','<%= video[i].id_video %>')" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(190, 190, 190); color: black;">
+                                            <i class="fas fa-video"></i> <%= video[i].judul_video %>
+                                        </button>
+                                    </li>
+                                <% } %>
                             <% } %>
                         </ul>
                         <form action="/commonusers/gabung" method="post">
-                            <input type="hidden" name="id_kelas" value="<%= kelas.id_kelas %>"> <!-- Ganti 123 dengan id_kelas yang sesuai -->
+                            <input type="hidden" name="id_kelas" value="<%= kelas.id_kelas %>">
                             <button type="submit" class="btn btn-primary btn-sm me-3 rounded-pill" style="background-color: #00B0FF; color: white;">
                                 Gabung Kelas
                             </button>
                         </form>
-                        
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Script JavaScript -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        
+
         <script>
-        var globalVideoIDs; // Variabel global untuk menyimpan id_video dari video yang dipilih
+            var globalVideoIDs; // Variabel global untuk menyimpan id_video dari video yang dipilih
 
-function changeVideo(videoUrl,idvideo) {
-    // Menetapkan nilai globalVideoIDs
-    globalVideoIDs = idvideo;
-    document.getElementById('id_video').value = idvideo;
-    var videoId = getYouTubeVideoId(videoUrl);
-    var mainVideo = document.getElementById('main-video');
-    mainVideo.src = 'https://www.youtube.com/embed/' + videoId;
-    $('#videoModal').modal('show'); // Menampilkan modal saat video berubah
-}
+            function changeVideo(videoUrl, idvideo) {
+                // Menetapkan nilai globalVideoIDs
+                globalVideoIDs = idvideo;
+                document.getElementById("id_video").value = idvideo;
+                var videoId = getYouTubeVideoId(videoUrl);
+                var mainVideo = document.getElementById('main-video');
+                mainVideo.src = 'https://www.youtube.com/embed/' + videoId;
+                $('#videoModal').modal('show'); // Menampilkan modal saat video berubah
+            }
 
-function openVideoModal(videoId) {
-    $('#videoModal').modal('show'); // Menampilkan modal saat video diklik
-}
+            function openVideoModal(videoId) {
+                $('#videoModal').modal('show'); // Menampilkan modal saat video diklik
+            }
 
-    function getYouTubeVideoId(url) {
-      var videoId = '';
-      var match = url.match(/[?&]v=([^&]+)/);
-      if (match) {
-        videoId = match[1];
-      } else {
-        // Jika URL dalam format 'https://youtu.be/VIDEO_ID'
-        match = url.match(/youtu\.be\/([^&]+)/);
-        if (match) {
-          videoId = match[1];
-        }
-      }
-      return videoId;
-    }
+            function getYouTubeVideoId(url) {
+                var videoId = '';
+                var match = url.match(/[?&]v=([^&]+)/);
+                if (match) {
+                    videoId = match[1];
+                } else {
+                    // Jika URL dalam format 'https://youtu.be/VIDEO_ID'
+                    match = url.match(/youtu\.be\/([^&]+)/);
+                    if (match) {
+                        videoId = match[1];
+                    }
+                }
+                return videoId;
+            }
         </script>
-        
 
         <!-- Akhir Project One-->
 
-            <!-- Ruang antara Project One dan Project Two -->
-            <div class="mb-4 mb-7"></div>
+        <!-- Ruang antara Project One dan Project Two -->
+        <div class="mb-4 mb-7"></div>
 
-        <!-- Project Two  -->
-
-        <div class="row gx-4 mb-4 mb-lg-5 justify-content-start">
-            <!-- Tombol About -->
-            <div class="col-md-3">
-                <a href="#About">
-                    <button type="button" class="btn btn-primary btn-sm me-3 rounded-pill btn-hover" style="background-color: #E0E0E0; color: #4a4a4a;">About</button>
-                </a>
+<!-- Project Two -->
+<div class="row gx-4 mb-4 mb-lg-5 justify-content-start">
+    <!-- Tombol About -->
+    <div class="col-md-3">
+        <a href="#About">
+            <button type="button" class="btn btn-primary btn-sm me-3 rounded-pill btn-hover" style="background-color: #E0E0E0; color: #4a4a4a;">About</button>
+        </a>
+    </div>
+</div>
+    <!-- Deskripsi Kelas -->
+    <div class="col-md-9">
+        <div class="card mb-2" style="width: 100%; max-width: 3100px;">
+            <div class="card-body">
+                <%= kelas.deskripsi %>
             </div>
+        </div>
+    </div>
+<!-- Akhir Project Two -->
+ 
+
+
             <!-- Tombol Lessons -->
-            <div class="col-md-3">
-                <a href="#lessonCard">
-                    <button type="button" class="btn btn-outline-primary btn-sm rounded-pill btn-hover" style="background-color: #E0E0E0; border-color: #E0E0E0; color: #4a4a4a;">Lessons</button>
-                </a>
-            </div>
-            <!-- Tombol Tools -->
-            <div class="col-md-3">
-                <a href="#Tools">
-                    <button type="button" class="btn btn-outline-primary btn-sm rounded-pill btn-hover" style="background-color: #E0E0E0; border-color: #E0E0E0; color: #4a4a4a;">Tools</button>
-                </a>
-            </div>
-            <!-- Tombol Review -->
-            <div class="col-md-3">
-                <a href="#Review">
-                    <button type="button" class="btn btn-outline-primary btn-sm rounded-pill btn-hover" style="background-color: #E0E0E0; border-color: #E0E0E0; color: #4a4a4a;">Review</button>
-                </a>
-            </div>
+
+            <!-- Ruang antara Project Two dan Project Three -->
+            <div class="mb-4 mb-7"></div>
+            
+
+            <!-- Project Three -->
+
+            <script>
+                // JavaScript untuk menyembunyikan dan menampilkan daftar pelajaran
+                function toggleLessons() {
+                    var lessonsList = document.getElementById("lessonsList");
+                    var toggleIcon = document.getElementById("toggleIcon");
+                    if (lessonsList.style.display === "none") {
+                        lessonsList.style.display = "block";
+                        toggleIcon.classList.add("rotate180");
+                    } else {
+                        lessonsList.style.display = "none";
+                        toggleIcon.classList.remove("rotate180");
+                    }
+                }
+            </script>
+            <!-- Akhir Project Three -->
+
+            <!-- load more -->  
+            <!-- End load more -->
+
+            <!-- Ruang antara Project Six dan Project Seven -->
+            <div class="mb-4 mb-7"></div>
         </div>
-        
-
-        <!-- Akhir Project Two  -->
-        <!-- Ruang antara Project Two dan Project Three -->
-        <div class="mb-4 mb-7"></div>
-
-        <!-- Project Three -->
-     
-
-        <script>
-        // JavaScript untuk menyembunyikan dan menampilkan daftar pelajaran
-        function toggleLessons() {
-            var lessonsList = document.getElementById("lessonsList");
-            var toggleIcon = document.getElementById("toggleIcon");
-            if (lessonsList.style.display === "none") {
-                lessonsList.style.display = "block";
-                toggleIcon.classList.add("rotate180");
-            } else {
-                lessonsList.style.display = "none";
-                toggleIcon.classList.remove("rotate180");
-            }
-        }
-
-        </script>
-        <!-- Akhir Project Three -->
-        
-        <!-- load more -->
-        <div class="text-center">
-            <button type="button" class="btn btn-primary btn-sm me-3 rounded-pill" style="background-color: #00B0FF; color: white;" onclick="showMoreContent()">
-                Lihat Selengkapnya
-            </button>
-        </div>
-        <!-- End load more -->
-
-        <!-- Ruang antara Project Six dan Project Seven -->
-        <div class="mb-4 mb-7"></div>
     </div>
 </section>
 
@@ -204,7 +180,9 @@ function openVideoModal(videoId) {
                         </div>
                     </div>
                     <!-- Submit error message-->
-                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3 mt-2">Error sending message!</div></div>
+                    <div class="d-none" id="submitErrorMessage">
+                        <div class="text-center text-danger mb-3 mt-2">Error sending message!</div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -217,22 +195,21 @@ function openVideoModal(videoId) {
 <%- include('../../partials/common/_footer') %>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const hiddenContent = document.querySelectorAll('.hidden-content .col-lg-4');
-        hiddenContent.forEach((element, index) => {
-            if (index >= 3) {
-                element.style.display = 'none';
-            }
-        });
-    });
+hiddenContent.forEach((element, index) => {
+if (index >= 3) {
+element.style.display = 'none';
+}
+});
+});
 
-    function showMoreContent() {
-        const hiddenContent = document.querySelectorAll('.hidden-content .col-lg-4');
-        hiddenContent.forEach(element => {
-            element.style.display = 'block';
-        });
-        const button = document.querySelector('button[onclick="showMoreContent()"]');
-        button.style.display = 'none';
-    }
-</script>
+function showMoreContent() {
+    const hiddenContent = document.querySelectorAll('.hidden-content .col-lg-4');
+    hiddenContent.forEach(element => {
+        element.style.display = 'block';
+    });
+    const button = document.querySelector('button[onclick="showMoreContent()"]');
+    button.style.display = 'none';
+}
 

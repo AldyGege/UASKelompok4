@@ -29,6 +29,24 @@ class Model_Kelas {
             );
         });
     }
+
+    static async getByIdAlurBelajar(id_alur_belajar) {
+        return new Promise((resolve, reject) => {
+            connection.query(
+                'SELECT kp.*, a.nama_alat, a.file_alat, k.nama_kategori FROM kelas_pembelajaran kp LEFT JOIN alat a ON kp.id_alat = a.id_alat LEFT JOIN kategori_pembelajaran k ON kp.id_kategori = k.id_kategori WHERE kp.id_alur_belajar = ? ORDER BY kp.urutan ASC;',
+                [id_alur_belajar],
+                (err, rows) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(rows);
+                    }
+                }
+            );
+        });
+    }
+    
+    
     
     static async Store(Data) {
         return new Promise((resolve, reject) => {

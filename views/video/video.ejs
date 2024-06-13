@@ -30,7 +30,16 @@
                 <% } %>
               </div>
             </div>
-            <div class="card-footer">
+            <div class="card-footer">   
+              <form action="/video/updateId/<%= video.id_video %>" method="POST">
+                <div class="btn-group">
+                    <select class="btn btn-warning dropdown-toggle" name="status">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
               <a href="/video/edit/<%= video.id_video %>" class="btn btn-warning">Edit</a>
               <a href="/video/delete/<%= video.id_video %>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus video ini?');">Hapus</a>
             </div>

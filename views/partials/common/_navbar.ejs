@@ -7,7 +7,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link text-black" href="#about">Tentang Kami</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdownKelas" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Kelas
@@ -31,33 +30,7 @@
                         <!-- /existing code frontend -->
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdownAlur" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Alur Belajar
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownAlur">
-                        <% alur_belajar.forEach(function(item) { %>
-                            <li>
-                                <a class="dropdown-item" href="/commonusers/class">
-                                    <div class="row">
-                                        <div class="col">
-                                            <img class="img-fluid rounded-circle" src="/images/upload/<%= item.file_alur_belajar %>" alt="<%= item.alur_belajar %>" style="width: 30px; height: 30px;">
-                                        </div>
-                                        <div class="col mt-2">
-                                            <h5 class="card-title mb-0" style="font-weight: bold; font-size: 1rem;"><%= item.alur_belajar %></h5>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <% }); %>
-                            <!-- /existing code frontend -->
-                                <!-- <li><a class="dropdown-item" href="/class">UI/UX Design</a></li>
-                                <li><a class="dropdown-item" href="#">Web Development</a></li>
-                                <li><a class="dropdown-item" href="#">Android Development</a></li>
-                                <li><a class="dropdown-item" href="#">Product Manager</a></li> -->
-                            <!-- /existing code frontend -->
-                    </ul>
-                </li>
+
                 <li class="nav-item">
                   <a class="nav-link text-black" href="#signup">Hubungi Kami</a>
                 </li>
@@ -72,10 +45,10 @@
             </div>
             <div class="dropdown">
                 <button class="btn p-0 border-0 mx-3" type="button" id="dropdownUserMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#000000" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#000000" class="bi bi-person-circle" viewBox="0 0 16 16">
                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                    </img>
+                    </svg>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUserMenu">
                     <li><a class="dropdown-item" href="/profile/commonuser">Profile</a></li>

@@ -75,7 +75,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post('/saveusers',upload.single("file_user"),async (req, res) => {
-  let { nama_users, email, password, role} = req.body;
+  let { nama_users, email,password , role} = req.body;
   try {
       let enkripsi = await bcrypt.hash(password, 10);
       let Data = {

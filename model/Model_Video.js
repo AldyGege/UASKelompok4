@@ -12,6 +12,21 @@ class Model_Video {
             });
         });
     }    
+
+    static async getLatestVideos() {
+        return new Promise((resolve, reject) => {
+            // Sesuaikan query berdasarkan kebutuhan, misalnya mengambil 4 video terbaru
+            connection.query('SELECT * FROM video ORDER BY id_video DESC LIMIT 4', (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
+    
+
     static async getByIdKelas(id_kelas) {
         return new Promise((resolve, reject) => {
             connection.query(
