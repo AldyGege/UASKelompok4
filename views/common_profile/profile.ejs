@@ -1,5 +1,5 @@
-<%- include('../partials/katogori_pembelajaran/_head.ejs') %>
-<%- include('../partials/katogori_pembelajaran/_navbar.ejs') %>
+<%- include('../partials/profile/_head.ejs') %>
+<%- include('../partials/profile/_navbar.ejs') %>
 
 <div class="container my-5">
     <!-- Judul -->
@@ -29,7 +29,7 @@
                                     <% if(data[0].role == 1) { %>
                                         Admin
                                     <% } else if (data[0].role == 2) { %>
-                                        Konsumen
+                                        Tutor
                                     <% } else { %>
                                         User
                                     <% } %>
@@ -89,5 +89,5 @@
     <!-- /Profile Page Content -->
 </div>
 
-<%- include('../partials/katogori_pembelajaran/_contact.ejs') %>
-<%- include('../partials/katogori_pembelajaran/_footer.ejs') %>
+<%- include('../partials/profile/_contact.ejs') %>
+<%- include('../partials/profile/_footer.ejs') %>

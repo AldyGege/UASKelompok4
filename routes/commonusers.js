@@ -58,7 +58,8 @@ router.get('/class/:id', async function (req, res, next) {
         let alat = await Model_Alat.getAll();
         let kelas = await Model_Kelas.getIdK(kategoriId);
         let alur_belajar = await Model_Alur_Belajar.getAll();
-        let kategori = await Model_Kategori_Pembelajaran.getId(kategoriId); // Adjust this method as per your model structure
+        let kategori = await Model_Kategori_Pembelajaran.getId(kategoriId);
+        let kategoris = await Model_Kategori_Pembelajaran.getAll();
 
         // Render halaman dengan data
         res.render("users/detail_common/detail_kelas", {
@@ -69,7 +70,8 @@ router.get('/class/:id', async function (req, res, next) {
           alat: alat,
           kelas: kelas,
           alur_belajar: alur_belajar,
-          kategori: kategori[0]
+          kategoris: kategori[0],
+          kategori: kategoris
         });
       }
     } else {

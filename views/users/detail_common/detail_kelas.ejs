@@ -1,7 +1,7 @@
 <%- include('../../partials/common/_head.ejs') %>
 
 <!-- Navigation-->
-<%- include('../../partials/common/_navbar', { kategori: kategori }) %>
+<%- include('../../partials/common/_navbar') %>
 
 <!-- Projects-->
 <section class="projects-section" id="projects">
@@ -10,7 +10,7 @@
         <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
             <div class="col-xl-4 col-lg-5">
                 <div class="Page text-lg-left text-black" style="margin-right: 20px;">
-                    <p><%= kategori.nama_kategori %></p>
+                    <p><%= kategoris.nama_kategori %></p>
                 </div>
                 <p class="text-black mb-0">Gabung sekarang dan mulai perjalananmu untuk menjadi desainer profesional.</p>
             </div>
