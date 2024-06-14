@@ -107,15 +107,20 @@ router.get('/course/:id', async function (req, res, next) {
 
     if (id) {
       let Data = await Model_Users.getId(id);
+      let activityRows = await Model_Activity.getByIdUsers(id);
+      let activityRows2 = await Model_Activity.getByIdUsers2(id);
       let kelas = await Model_Kelas.getId(kategoriId);
       let video = await Model_Video.getByIdKelas(kategoriId);
 
       res.render("users/detail_common/detail_course", {
         title: "Users Home",
+        iduser: req.session.userId,
         email: Data[0].email || '',
         nama_users: Data[0].nama_users || '',
         role: req.session.role,
         globalVideoIDs: 1,
+        activities: activityRows,
+        activitiescls: activityRows2,
         kelas: kelas[0],
         video: video,
         idvideo: video[0],
@@ -127,13 +132,19 @@ router.get('/course/:id', async function (req, res, next) {
       let alat = await Model_Alat.getAll();
       let video = await Model_Video.getByIdKelas(kategoriId);
       let kelas = await Model_Kelas.getId(kategoriId);
+      let activityRows = await Model_Activity.getByIdUsers(id);
+      let activityRows2 = await Model_Activity.getByIdUsers2(id);
+     
 
       res.render("users/detail_common/detail_course", {
+        iduser: 0,
         title: "Users Home",
         email: '', // No user email since user ID is null
         nama_users: '', // No user name since user ID is null
         role: req.session.role,
+        activities:activityRows,
         alat: alat,
+        activitiescls: activityRows2,
         video: video,
         idvideo: video[0],
         kelas: kelas[0],

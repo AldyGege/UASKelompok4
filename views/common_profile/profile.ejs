@@ -108,6 +108,9 @@
                             <h3>Your Last Video</h3>
                         </div>
                         <% activities.slice(0, 3).forEach(function(activity) { %>
+                            <script>
+                                console.log('ID:', '<%= activity.id_video %> <%= activity.judul_video %>');
+                            </script>
                             <div class="col-md-4 mt-3">
                                 <div class="card shadow-lg">
                                     <div class="card-body">
@@ -128,6 +131,9 @@
                         </div>
                         <div class="col-md-12 mt-3">
                             <% activitiescls.forEach(function(activity) { %>
+                                <script>
+                                    console.log('Video ID:', '<%= activity.id_video %> ');
+                                </script>
                                 <a href="/commonusers/course/<%= activity.id_kelas %>" class="card-link">
                                     <div class="card shadow-lg mb-3">
                                         <div class="card-body">
@@ -135,15 +141,23 @@
                                             <div class="list-group list-group-flush">
                                                 <ul>
                                                     <% video.forEach(function(videos) { %>
-                                                        <% if (videos.id_kelas === activity.id_kelas) { %>
+                                                        <% if (videos.id_kelas == activity.id_kelas) { %>
                                                             <li class="list-group-item">
                                                                 <% let isMatched = false; %>
-                                                                <% activitiescls.forEach(activity => { %>
-                                                                    <% if (activity.id_video === videos.id_video && activity.id_users === id) { %>
+                                                                <% activities.forEach(activity => { %>
+                                                                    <% let idvideo = activity.id_video ; %>
+                                                                    <% if (activity.id_video == videos.id_video && activity.id_users === id) { %>
                                                                         <% isMatched = true; %>
                                                                     <% } %>
-                                                                <% }); %>
-                                                                <%= videos.judul_video %> <%= isMatched ? 'sudah' : '' %>
+                                                                    <script>
+                                                                        console.log('Video ID:', '<%= videos.id_video %> <%= activity.id_video %> <%= activity.id_users %> <%= id %>', 'isMatched:', '<%= isMatched %>');
+                                                                    </script>
+                                                                <% }); %>          
+                                                                <% if (isMatched) { %>
+                                                                    <del><%= videos.judul_video %></del> 
+                                                                <% } else { %>
+                                                                    <%= videos.judul_video %>
+                                                                <% } %>
                                                             </li>
                                                         <% } %>
                                                     <% }); %>
@@ -153,6 +167,7 @@
                                     </div>
                                 </a>
                             <% }); %>
+                            
                         </div>
                     </div>
                 </div>

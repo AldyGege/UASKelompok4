@@ -68,7 +68,7 @@ class Activity {
         activity 
       JOIN 
         kelas_pembelajaran 
-        ON activity.id_kelas = kelas_pembelajaran.id_kelas      
+        ON activity.id_kelas = kelas_pembelajaran.id_kelas 
       WHERE 
         activity.id_users = ?
       `;
@@ -86,16 +86,19 @@ class Activity {
     return new Promise((resolve, reject) => {
       const query = `
         SELECT 
-          activity.*, 
-          video.* 
-        FROM 
-          activity 
-        JOIN 
-          video 
-        ON 
-          activity.id_video = video.id_video 
-        WHERE 
-          activity.id_users = ?
+    activity.*, 
+    video.id_video, 
+    video.judul_video, 
+    video.link_video, 
+    video.id_kelas
+FROM 
+    activity
+JOIN 
+    video 
+ON 
+    activity.id_video = video.id_video
+WHERE 
+    activity.id_users = ?
       `;
       connection.query(query, [idUsers], (err, rows) => {
         if (err) {

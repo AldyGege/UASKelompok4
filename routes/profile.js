@@ -105,7 +105,7 @@ router.get('/commonuser', async function(req, res, next) {
 
 
         res.render('common_profile/profile', {
-            id: id,
+            id: req.session.userId,
             data: userRows,
             email: email,
             activities: activityRows,

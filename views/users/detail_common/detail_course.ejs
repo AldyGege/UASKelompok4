@@ -10,7 +10,7 @@
         <div class="gx-0 mb-4 mb-lg-5 text-center">
             <div class="Page text-lg-left text-black" style="margin-right: 20px;font-size: 2rem;">
                 <p><%= kelas.judul %></p>
-                <p>Rp <%= kelas.harga_kelas %></p>
+                
             </div>
             <p class="text-black mb-0 mt-5">Learn how to build a real project from scratch</p>
         </div>
@@ -39,25 +39,66 @@
                         <h5 class="fw-bold mb-3">Lessons</h5>
                         <ul class="lessons-list">
                             <% for(let i = 0; i < video.length; i++) { %>
-                                <% if(nama_users !== '' || video[i].status === 'yes') { %>
-                                    <li>
-                                        <button onclick="changeVideo('<%= video[i].link_video %>','<%= video[i].id_video %>')" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(190, 190, 190); color: black;">
-                                            <i class="fas fa-video"></i> <%= video[i].judul_video %>
-                                        </button>
+                                <% if(nama_users !== '' || video[i].status === 'yes') { %>                                   
+                                    <li class="list-group-item">
+                                        <% let isMatched = false; %>
+
+<% activities.forEach(activity => { %>
+    <% if (activity.id_video == video[i].id_video && activity.id_users === iduser) { %>
+        <% isMatched = true; %>
+    <% } %>
+<% }); %>
+
+<% if (isMatched) { %>
+    <button onclick="changeVideo('<%= video[i].link_video %>','<%= video[i].id_video %>')" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(30, 231, 40); color: black;">
+        <i class="fas fa-video"></i> <%= video[i].judul_video %> 
+    </button> 
+<% } else { %>
+    <button onclick="changeVideo('<%= video[i].link_video %>','<%= video[i].id_video %>')" class="btn btn-primary btn-sm rounded-pill" style="background-color: rgb(190, 190, 190); color: black;">
+        <i class="fas fa-video"></i> <%= video[i].judul_video %>
+    </button>
+<% } %>
+
                                     </li>
                                 <% } %>
                             <% } %>
-                        </ul>
-                        <form action="/commonusers/gabung" method="post">
-                            <input type="hidden" name="id_kelas" value="<%= kelas.id_kelas %>">
-                            <button type="submit" class="btn btn-primary btn-sm me-3 rounded-pill" style="background-color: #00B0FF; color: white;">
-                                Gabung Kelas
-                            </button>
-                        </form>
+                            <li>
+                                <% if (iduser === 0) { %>
+                                    <!-- Show form for iduser === 0 -->
+                                    
+                                    <div class="btn-group" role="group" aria-label="Register Buttons">
+                                        <a class="btn btn-outline-black" href="/register_user">Daftar</a>
+                                    </div>
+                                    
+                                <% } else { %>
+                                    <!-- Show form for iduser !== 0 based on activitiescls -->
+                                    <% var showFormTambah = true; %>
+
+                                    <% activitiescls.forEach(function(activity) { %>
+                                        <% if (activity.id_users === iduser) { %>
+                                            <% showFormTambah = false; %>
+                                        <% } %>
+                                    <% }); %>
+                                    
+                                    <% if (showFormTambah) { %>
+                                        <form id="tambah" action="/commonusers/gabung" method="post">
+                                            <input type="hidden" name="id_kelas" value="<%= kelas.id_kelas %>">
+                                            <button type="submit" class="btn btn-primary btn-sm me-3 rounded-pill" style="background-color: #00B0FF; color: white;">
+                                                Tambah ke Profile
+                                            </button>
+                                        </form>
+                                    <% } %>
+                                <% } %>
+                                
+                                            <li>
+                        </ul>                       
                     </div>
                 </div>
             </div>
         </div>
+        
+            // JavaScript logic to conditionally show/hide forms
+            
 
         <!-- Script JavaScript -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
