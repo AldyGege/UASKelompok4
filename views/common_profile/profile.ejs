@@ -4,27 +4,79 @@
 <style>
     .rounded-circle {
         border-radius: 50%;
-        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75); /* Mengatur bayangan: horisontal-offset vertical-offset blur spread color */
-        object-fit: cover; /* Mengatasi gambar yang terlalu panjang atau lebar */
-        width: 250px; /* Atur lebar sesuai kebutuhan */
-        height: 250px; /* Atur tinggi sesuai kebutuhan */
+        box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.3);
+        object-fit: cover;
+        width: 200px;
+        height: 200px;
+    }
+
+    .list-group-item {
+        font-weight: bold;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .list-group-item:hover {
+        background-color: #f8f9fa;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        transform: translateX(5px);
+    }
+
+    .list-group {
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .content-section {
+        display: none;
+        margin-left: 90px;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .content-section h3 {
+        font-family: 'Poppins', sans-serif;
+        font-weight: bold;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+    }
+
+    .card-title {
+        font-family: 'Poppins', sans-serif;
+        font-weight: bold;
+    }
+
+    .card-text {
+        font-family: 'Poppins', sans-serif;
     }
 </style>
 
 <div class="container my-5">
-    <!-- Judul -->
-    <div class="text-center mb-4" style="margin-top: 80px;">
-        <h2>User Profile</h2>
-    </div>
     <!-- Profile Page Content -->
-    <div class="container-fluid mt-5">
-        <!-- Content -->
-        <div class="container mt-5">
-            <div class="row mt-5">
-                <div class="col-4 text-center">
-                    <img src="/images/upload/<%= data[0].file_user %>" width="250" alt="Nama Gambar" class="img-fluid rounded-circle">
-                </div>
-                <div class="col-8">
+    <div class="row" style="margin-top: 125px;">
+        <!-- Left Column -->
+        <div class="col-md-3">
+            <div class="text-center mb-4">
+                <img src="/images/upload/<%= data[0].file_user %>" alt="Nama Gambar" class="img-fluid rounded-circle mb-3">
+            </div>
+            <div class="list-group">
+                <button class="list-group-item list-group-item-action" onclick="showSection('settings')">My Profile</button>
+                <button class="list-group-item list-group-item-action" onclick="showSection('progress')">Learning Progress</button>
+                <button class="list-group-item list-group-item-action" onclick="showSection('courses')">My Courses</button>
+                <button class="list-group-item list-group-item-action" onclick="showSection('ebooks')">My Ebooks</button>
+            </div>
+        </div>
+        <!-- Right Column -->
+        <div class="col-md-9">
+            <div id="content">
+                <!-- Default section is My Profile -->
+                <div id="settings" class="content-section" style="display: block;">
+                    <h3>My Profile</h3>
+                    
                     <div class="card shadow-lg mb-4 border-left-success">
                         <div class="card-header py-3 d-flex justify-content-end align-items-end">
                             <a href="/profile/edit/<%= data[0].id_users %>" class="btn btn-sm btn-success text-black">
@@ -35,7 +87,7 @@
                             <div class="profile-info">
                                 <p><strong>Nama :</strong> <%= data[0].nama_users %></p>
                                 <p><strong>Email :</strong> <%= data[0].email %></p>
-                                <p><strong>Level :</strong> 
+                                <p><strong>Level :</strong>
                                     <% if(data[0].role == 1) { %>
                                         Admin
                                     <% } else if (data[0].role == 2) { %>
@@ -48,64 +100,91 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Activities Section -->
-            <div class="row mt-5">
-                <div class="col-12">
-                    <h3>Your Last Video</h3>
-                </div>
-                <% activities.slice(0, 3).forEach(function(activity) { %>
-                    <div class="col-md-4 mt-3">
-                        <div class="card shadow-lg">
-                            <div class="card-body">
-                                <h5 class="card-title"><%= activity.judul_video %></h5>
-                                <p class="card-text"><small class="text-muted">Date: <%= activity.time %></small></p>
-                            </div>
+                
+                <!-- Learning Progress Section -->
+                <div id="progress" class="content-section">
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <h3>Your Last Video</h3>
                         </div>
-                    </div>
-                <% }); %>
-            </div>  
-            
-            <div class="row mt-5">
-                <div class="col-12">
-                    <h3>Your Class</h3>
-                </div>
-                <div class="col-md-4 mt-3">
-                    <% activitiescls.forEach(function(activity) { %>
-                        <a href="/commonusers/course/<%= activity.id_kelas %>" class="card-link">
-                            <div class="card shadow-lg mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title"><%= activity.judul %></h5>
-                                    <div class="list-group list-group-flush">
-                                        <ul>
-                                            <% video.forEach(function(videos) { %>
-                                                <% if (videos.id_kelas === activity.id_kelas) { %>
-                                                    <li class="list-group-item">
-                                                        <% let isMatched = false; %>
-                                                        <% activitiescls.forEach(activity => { %>
-                                                            <% if (activity.id_video === videos.id_video && activity.id_users === id) { %>
-                                                                <% isMatched = true; %>
-                                                            <% } %>
-                                                        <% }); %>
-                                                        <%= videos.judul_video %> <%= isMatched ? 'sudah' : '' %>
-                                                    </li>
-                                                <% } %>
-                                            <% }); %>                                                                                                                      
-                                        </ul>
+                        <% activities.slice(0, 3).forEach(function(activity) { %>
+                            <div class="col-md-4 mt-3">
+                                <div class="card shadow-lg">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= activity.judul_video %></h5>
+                                        <p class="card-text"><small class="text-muted">Date: <%= activity.time %></small></p>
                                     </div>
                                 </div>
                             </div>
-                        </a>
-                    <% }); %>
+                        <% }); %>
+                    </div>
                 </div>
-                
+
+                <!-- My Courses Section -->
+                <div id="courses" class="content-section">
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <h3>Your Class</h3>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <% activitiescls.forEach(function(activity) { %>
+                                <a href="/commonusers/course/<%= activity.id_kelas %>" class="card-link">
+                                    <div class="card shadow-lg mb-3">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= activity.judul %></h5>
+                                            <div class="list-group list-group-flush">
+                                                <ul>
+                                                    <% video.forEach(function(videos) { %>
+                                                        <% if (videos.id_kelas === activity.id_kelas) { %>
+                                                            <li class="list-group-item">
+                                                                <% let isMatched = false; %>
+                                                                <% activitiescls.forEach(activity => { %>
+                                                                    <% if (activity.id_video === videos.id_video && activity.id_users === id) { %>
+                                                                        <% isMatched = true; %>
+                                                                    <% } %>
+                                                                <% }); %>
+                                                                <%= videos.judul_video %> <%= isMatched ? 'sudah' : '' %>
+                                                            </li>
+                                                        <% } %>
+                                                    <% }); %>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Ebooks Section -->
+                <!-- <div id="ebooks" class="content-section">
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <h3>My Ebooks</h3>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                        </div>
+                    </div>
+                </div> -->
+
             </div>
-            <div class="row mt-5"></div>
-        <!-- /Content Row -->
+        </div>
     </div>
     <!-- /Profile Page Content -->
 </div>
+
+<script>
+    function showSection(sectionId) {
+        // Hide all content sections
+        document.querySelectorAll('.content-section').forEach(function(section) {
+            section.style.display = 'none';
+        });
+
+        // Show the selected section
+        document.getElementById(sectionId).style.display = 'block';
+    }
+</script>
 
 <%- include('../partials/profile/_contact.ejs') %>
 <%- include('../partials/profile/_footer.ejs') %>

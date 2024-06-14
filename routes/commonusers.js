@@ -96,74 +96,56 @@ router.get('/class/:id', async function (req, res, next) {
     next(error);
   }
 });
+
 router.get('/course/:id', async function (req, res, next) {
   try {
     let id = req.session.userId;
-    
+    let kategoriId = req.params.id;
+
+    let kategori = await Model_Kategori_Pembelajaran.getAll();
+    let alur_belajar = await Model_Alur_Belajar.getAll();
+
     if (id) {
-      // Get the category ID from the URL parameter
-      let kategoriId = req.params.id;
+      let Data = await Model_Users.getId(id);
+      let kelas = await Model_Kelas.getId(kategoriId);
+      let video = await Model_Video.getByIdKelas(kategoriId);
 
-      try {
-          let Data = await Model_Users.getId(id);
-          let kelas = await Model_Kelas.getId(kategoriId);
-          let video = await Model_Video.getByIdKelas(kategoriId);
-          // Render halaman dengan data pengguna
-          res.render("users/detail_common/detail_course", {
-            title: "Users Home",
-            email: Data[0].email || '',
-            nama_users: Data[0].nama_users || '',
-            role: req.session.role,
-            globalVideoIDs: 1,
-            kelas:kelas[0],
-            video: video,
-            idvideo: video[0],
-          });
+      res.render("users/detail_common/detail_course", {
+        title: "Users Home",
+        email: Data[0].email || '',
+        nama_users: Data[0].nama_users || '',
+        role: req.session.role,
+        globalVideoIDs: 1,
+        kelas: kelas[0],
+        video: video,
+        idvideo: video[0],
+        kategori: kategori,
+        alur_belajar: alur_belajar // Include alur_belajar
+      });
 
-      } catch (error) {
-          console.error('Error fetching user data:', error);
-          // Handle the error appropriately
-          next(error);
-      }
-      
     } else {
-      // Get the category ID from the URL parameter
-      let kategoriId = req.params.id;
+      let alat = await Model_Alat.getAll();
+      let video = await Model_Video.getByIdKelas(kategoriId);
+      let kelas = await Model_Kelas.getId(kategoriId);
 
-      try {
-        let alat = await Model_Alat.getAll();
-        let video = await Model_Video.getByIdKelas(kategoriId);
-        let kelas = await Model_Kelas.getId(kategoriId);
-        let alur_belajar = await Model_Alur_Belajar.getAll();
-        let kategori = await Model_Kategori_Pembelajaran.getId(kategoriId); // Adjust this method as per your model structure
-
-        // Render halaman dengan data tanpa pengguna
-        res.render("users/detail_common/detail_course", {
-          title: "Users Home",
-          email: '', // No user email since user ID is null
-          nama_users: '', // No user name since user ID is null
-          role: req.session.role,
-          alat: alat,
-          video: video,
-          idvideo: video[0],
-          kelas: kelas[0],
-          alur_belajar: alur_belajar,
-          globalVideoIDs: 1,
-          kategori: kategori[0],
-          kategoris: kategori[0]
-        });
-
-      } catch (error) {
-        console.error('Error fetching course data:', error);
-        // Handle the error appropriately
-        next(error);
-      }
+      res.render("users/detail_common/detail_course", {
+        title: "Users Home",
+        email: '', // No user email since user ID is null
+        nama_users: '', // No user name since user ID is null
+        role: req.session.role,
+        alat: alat,
+        video: video,
+        idvideo: video[0],
+        kelas: kelas[0],
+        alur_belajar: alur_belajar, // Include alur_belajar
+        globalVideoIDs: 1,
+        kategori: kategori // Include kategori
+      });
     }
   } catch (error) {
     next(error);
   }
 });
-
 
 
 router.get('/alur/:id', async function (req, res, next) {
