@@ -184,13 +184,15 @@ router.post('/update/:id', upload.single("file_user"), async function (req, res,
             }
         }
 
-        const { nama_users, email } = req.body;
+        const { nama_users, email,password } = req.body;
+        let enkripsi = await bcrypt.hash(password, 10);
         const file_user = filebaru || namaFileLama;
         const Data = {
             nama_users,
             email,
+            password:enkripsi,
             file_user
-        };
+        }
 
         // Update data
         await Model_Users.Update(id, Data);
