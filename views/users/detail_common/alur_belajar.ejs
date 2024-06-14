@@ -12,13 +12,12 @@
                 <p class="text-success" style="font-size: 1rem;">Career path</p>
                 <div class="Page text-lg-left text-black" style="margin-right: 20px;">
                     <p><%= alurr.alur_belajar %></p>
-                  </div>
+                </div>
                 <div class="text-start mt-5 mb-5 mx-auto">
                     <a href="#mulai" class="btn btn-primary btn-sm me-3 rounded-pill" style="background-color: #00B0FF; color: white;">
                         Mulai Belajar
                     </a>
                 </div>
-                
             </div>
             <div class="mx-auto text-center col-lg-2">
                 <img class="img-fluid mb-3 mb-lg-0" src="/temp_land_page/assets/ilustration/uiuxdesain.svg" alt="..." style="max-width: 450px; height: auto;" />
@@ -30,7 +29,7 @@
         <div class="mb-5 mb-7"></div>
 
         <!-- Project One Row-->
-        <!-- <div  class="row gx-0 mb-4 mb-lg-5 align-items-center">
+        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
             <div class="col-xl-4 col-lg-5">
                 <p class="text-success" style="font-size: 1rem;">Low Risk, High Return</p>
                 <div class="Page text-lg-left" style="margin-right: 20px; font-size: 1.8rem;">
@@ -38,14 +37,14 @@
                     <p>Demi Karir Impianmu</p>
                 </div>
             </div>
-        </div> -->
+        </div>
         <!-- Akhir Project One Row-->
 
         <!-- Ruang antara Project One dan Project Two -->
         <div class="mb-4 mb-lg-5"></div>
 
         <!-- Project Two Row-->
-        <!-- <div class="row gx-4 mb-4 mb-lg-5 justify-content-center">
+        <div class="row gx-4 mb-4 mb-lg-5 justify-content-center">
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100">
                     <div class="card-body d-flex align-items-start">
@@ -79,92 +78,85 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
         <!-- Akhir Project Two Row-->
 
         <!-- Ruang antara Project Two dan Project Three -->
         <div class="mb-4 mb-lg-5"></div>
 
         <!-- Project Three Row-->
-        <!-- <div id="mulai" class="row gx-4 mb-4 mb-lg-5 justify-content-center text-center">
+        <div id="mulai" class="row gx-4 mb-4 mb-lg-5 justify-content-center text-center">
             <div class="col-lg-6 col-md-8 mb-4">
                 <div class="content">
                     <h5 style="font-weight: bold; font-size: 1.2rem; color: green;">Well-Designed Roadmap</h5>
                     <p style="font-weight: bold; font-size: 2rem;">Syllabus Become User-Interface Designer</p>
                 </div>
             </div>
-        </div> -->
+        </div>
         <!-- Akhir Project Three Row-->
 
-        
-        <div class="row mt-5">
-            <div class="col-md-4 mt-3">
-                <% kelas.forEach(function(activity, index) { %>
-                    <div class="col-12">
-                        <h3>Class <%= index + 1 %></h3>
-                    </div>
-                    <a href="/commonusers/course/<%= activity.id_kelas %>" class="card-link">
-                        <div class="card shadow-lg mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title"><%= activity.judul %></h5>
-                                <div class="list-group list-group-flush">
-                                    <ul>
-                                        <% video.forEach(function(videos) { %>
-                                            <% if (videos.id_kelas === activity.id_kelas) { %>
-                                                <li class="list-group-item"><%= videos.judul_video %></li>
-                                            <% } %>
-                                        <% }); %>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                <% }); %>
+<!-- Project Four Row -->
+<% kelas.forEach(function(activity, index) { %>
+    <div class="row gx-4 mb-4 mb-lg-5 justify-content-center">
+        <!-- Card Pertama -->
+        <div class="col-lg-8 col-md-10 mb-4">
+            <!-- Ikon Panah Kebawah -->
+            <% if (index > 0) { %>
+            <div class="text-center mb-4">
+                <i class="fas fa-chevron-down fa-3x text-primary"></i>
             </div>
-        </div>
-        
-        <!-- Akhir Project Four Row -->
-
-        <!-- Ikon Panah Kebawah -->
-        <!-- <div class="text-center mb-4">
-            <i class="fas fa-chevron-down fa-3x text-primary"></i>
-        </div> -->
-
-        <!-- Card Kedua -->
-        <div class="row gx-4 mb-4 mb-lg-5 justify-content-center">
-            <!-- Card Kedua di Tengah -->
-            <!-- <div class="col-lg-8 col-md-10 mb-4">
-                <div class="card h-100 position-relative card-expand" style="overflow: hidden; transition: all 0.3s;">
-                    <div class="card-body d-flex align-items-start">
-                        <div class="col-md-4 mb-3 mb-md-0">
-                            <div class="video-container">
-                                <iframe id="main-video-2" src="https://www.youtube.com/embed/YOUR_DEFAULT_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <h5 class="card-title mb-3 text-center" style="font-weight: bold; font-size: 1.8rem;">UI Design: Wireframe to Visual Design</h5>
-                            <ul class="card-text points-list" style="list-style-type: none; padding-left: 20px; margin-top: 10px; display: none;">
-                                <li><i class="fas fa-check-circle text-primary me-2"></i> Import Gambar dan Icon untuk Tampilan UI Design</li>
-                                <li><i class="fas fa-check-circle text-primary me-2"></i> Menentukan Hirarki Teks pada Konten</li>
-                                <li><i class="fas fa-check-circle text-primary me-2"></i> Mengubah Tampilan Wireframe menjadi Visual Design</li>
-                                <li><i class="fas fa-check-circle text-primary me-2"></i> Membuat Moodboard untuk Referensi Design</li>
-                            </ul>
-                            <a href="/class" class="btn btn-sm btn-primary rounded-pill learn-more" style="margin-top: 10px; background-color: #D3D3D3; border-color: #D3D3D3;">
-                                Pelajari Selengkapnya
+            <% } %>
+            <div class="card h-100 position-relative card-expand" style="overflow: hidden; transition: all 0.3s;">
+                <div class="card-body d-flex align-items-start">
+                    <!-- Video Utama -->
+                    <div class="col-md-6">
+                        <div class="video-container" onclick="changeVideo('<%= activity.video_url %>', '<%= activity.video_id %>')">
+                            <img src="https://img.youtube.com/vi/<%= activity.video_id %>/hqdefault.jpg" alt="Video Thumbnail" style="width: 100%; cursor: pointer;" onclick="changeVideo('<%= activity.video_url %>', '<%= activity.video_id %>')">
+                            <div class="play-button"></div>
+                        </div>                        
+                    </div>                    
+                    <div class="col-md-6">
+                        <h5 class="card-title mb-3 text-center">
+                            <a href="/commonusers/course/<%= activity.id_kelas %>" class="card-link">
+                                <h5 class="card-title" style="font-weight: bold; font-size: 1.8rem;"><%= activity.judul %></h5>
                             </a>
-                        </div>
+                        </h5>
+                        <ul class="card-text points-list" style="list-style-type: none; padding-left: 20px; margin-top: 10px; display: none;">
+                            <!-- Your list items here if needed -->
+                        </ul>
+                            <div class="text-center  mx-auto">
+                                <a href="/commonusers/course/<%= activity.id_kelas %>" Class="btn btn-primary btn-sm me-2 rounded-pill" style="background-color: #00B0FF; color: white;">
+                                    <p>Load More</p>
+                                </a>   
+                            </div>                                    
                     </div>
                 </div>
             </div>
-        </div> -->
-        <!-- Akhir Project Four Row -->
-
-
-
-        <!-- Ruang antara Project Six dan Project Seven -->
-        <div class="mb-4 mb-7"></div>
-
+        </div>
     </div>
+<% }); %>
+<!-- Akhir Project Four Row -->
+
+<!-- Modal Structure -->
+<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="videoModalLabel">Video</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <iframe id="main-video" width
+                ="100%" height="400" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Akhir Modal Structure -->
+
+<!-- Ruang antara Project Six dan Project Seven -->
+<div class="mb-4 mb-7"></div>
+</div>
 </section>
 
 <!-- Signup-->
@@ -193,7 +185,8 @@
                     </div>
                     <!-- Submit error message-->
                     <div class="d-none" id="submitErrorMessage">
-                        <div class="text-center text-danger mb-3 mt-2">Error sending message!</div></div>
+                        <div class="text-center text-danger mb-3 mt-2">Error sending message!</div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -207,6 +200,30 @@
 <%- include('../../partials/common/_footer') %>
 
 <script>
+     var globalVideoIDs; // Variabel global untuk menyimpan id_video dari video yang dipilih
+
+function changeVideo(videoUrl, idvideo) {
+    globalVideoIDs = idvideo;  // Simpan ID video secara global jika diperlukan
+    var videoId = getYouTubeVideoId(videoUrl);
+    var mainVideo = document.getElementById('main-video');
+    mainVideo.src = 'https://www.youtube.com/embed/' + videoId;
+    $('#videoModal').modal('show'); // Tampilkan modal setelah mengatur URL video
+}
+
+function getYouTubeVideoId(url) {
+    var videoId = '';
+    var match = url.match(/[?&]v=([^&]+)/);
+    if (match) {
+        videoId = match[1];
+    } else {
+        // Handle youtu.be URL format if necessary
+        match = url.match(/youtu\.be\/([^&]+)/);
+        if (match) {
+            videoId = match[1];
+        }
+    }
+    return videoId;
+}
     document.addEventListener("DOMContentLoaded", function() {
         const hiddenContent = document.querySelectorAll('.hidden-content .col-lg-4');
         hiddenContent.forEach((element, index) => {
@@ -224,28 +241,27 @@
         const button = document.querySelector('button[onclick="showMoreContent()"]');
         button.style.display = 'none';
     }
-    // (Card Behavior):
+
+    // Card Behavior:
     document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.card-expand');
+        const cards = document.querySelectorAll('.card-expand');
 
-    cards.forEach(card => {
-        card.addEventListener('mouseover', function() {
-            card.classList.add('expanded');
-            const pointsList = card.querySelector('.points-list');
-            const learnMoreButton = card.querySelector('.learn-more');
-            pointsList.style.display = 'block';
-            learnMoreButton.style.display = 'block';
-        });
+        cards.forEach(card => {
+            card.addEventListener('mouseover', function() {
+                card.classList.add('expanded');
+                const pointsList = card.querySelector('.points-list');
+                const learnMoreButton = card.querySelector('.learn-more');
+                pointsList.style.display = 'block';
+                learnMoreButton.style.display = 'block';
+            });
 
-        card.addEventListener('mouseleave', function() {
-            card.classList.remove('expanded');
-            const pointsList = card.querySelector('.points-list');
-            const learnMoreButton = card.querySelector('.learn-more');
-            pointsList.style.display = 'none';
-            learnMoreButton.style.display = 'none';
+            card.addEventListener('mouseleave', function() {
+                card.classList.remove('expanded');
+                const pointsList = card.querySelector('.points-list');
+                const learnMoreButton = card.querySelector('.learn-more');
+                pointsList.style.display = 'none';
+                learnMoreButton.style.display = 'none';
+            });
         });
     });
-});
-
 </script>
-
