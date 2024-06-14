@@ -8,6 +8,7 @@ const Model_Kategori = require("../model/Model_Kategori.js");
 const Model_Alat = require("../model/Model_Alat.js");
 const Model_Users = require("../model/Model_Users.js");
 const Model_Kelas = require("../model/Model_Kelas.js");
+const Model_Alur_Belajar = require("../model/Model_Alur_Belajar.js");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -41,15 +42,16 @@ router.get("/create", async function (req, res, next) {
   try {
     let kategori = await Model_Kategori.getAll();
     let alat = await Model_Alat.getAll();
+    let alur_belajar = await Model_Alur_Belajar.getAll();
     res.render("kelas_pembelajaran/create", {
       judul: "",
       deskripsi: "",
       harga_kelas: "",
-      link_kelas: "",
       id_kategori: "",
       id_alat: "",
       data1: kategori,
       data2: alat,
+      data3: alur_belajar
     });
   } catch (error) {
     console.log(error); // Menampilkan pesan kesalahan ke konsol
@@ -63,14 +65,15 @@ router.post(
   upload.single("file_kelas"),
   async function (req, res, next) {
     try {
-      let { judul, deskripsi, harga_kelas, link_kelas, id_kategori, id_alat } = req.body;
+      let { judul, deskripsi, harga_kelas, id_kategori, id_alat, id_alur_belajar, urutan } = req.body;
       let Data = {
         judul,
         deskripsi,
         harga_kelas,
-        link_kelas,
         id_kategori,
         id_alat,
+        id_alur_belajar,
+        urutan,
         file_kelas: req.file.filename
       };
       await Model_Kelas.Store(Data);
@@ -90,6 +93,7 @@ router.get("/edit/(:id)", async function (req, res, next) {
     let id = req.params.id;
     let kategori = await Model_Kategori.getAll();
     let alat = await Model_Alat.getAll();
+    let alur_belajar = await Model_Alur_Belajar.getAll();
     let rows = await Model_Kelas.getId(id);
     
     // Periksa apakah ada data yang ditemukan untuk ID yang diberikan
@@ -99,12 +103,14 @@ router.get("/edit/(:id)", async function (req, res, next) {
         judul: rows[0].judul,
         deskripsi: rows[0].deskripsi,
         harga_kelas: rows[0].harga_kelas,
-        link_kelas: rows[0].link_kelas,
+        urutan: rows[0].urutan,
         file_kelas: rows[0].file_kelas,
         id_kategori: rows[0].id_kategori,
         data1: kategori,
         id_alat: rows[0].id_alat,
         data2: alat,
+        id_alur_belajar: rows[0].id_alur_belajar,
+        data3: alur_belajar,
       });
     } else {
       // Jika tidak ada data yang ditemukan, kembalikan respon 404
@@ -127,15 +133,16 @@ router.post("/update/:id", upload.single("file_kelas"), async function (req, res
           fs.unlinkSync(pathFileLama);
       }
 
-      let { judul, deskripsi, harga_kelas, link_kelas, id_kategori, id_alat } = req.body;
+      let { judul, deskripsi, harga_kelas, id_kategori, id_alat, id_alur_belajar, urutan } = req.body;
       let file_kelas = filebaru || namaFileLama;
       let Data = {
         judul,
         deskripsi,
         harga_kelas,
-        link_kelas,
         id_kategori,
         id_alat,
+        id_alur_belajar,
+        urutan,
         file_kelas
       };
 

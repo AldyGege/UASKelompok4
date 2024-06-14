@@ -10,53 +10,98 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <style>
+      body, html {
+        height: 100%;
+      }
+      .form-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 20px;
+      }
+      .form-container form {
+        max-width: 800px;
+        width: 100%;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+      }
+      .form-container .row > div {
+        padding: 10px;
+      }
+      .form-container label {
+        font-weight: bold;
+      }
+      .form-container button[type="submit"] {
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
-    <div class="container mt-5">
-    <h2 class="mb-4">Edit Kelas</h2>
-    <form action="/kelas_pembelajaran/update/<%= id %>" method="POST" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="nama" class="form-label">Judul Kelas</label>
-            <input type="text" class="form-control" name="judul" value="<%= judul %>" required>
-        </div>   
+    <div class="form-container">
+      <form action="/kelas_pembelajaran/update/<%= id %>" method="POST" enctype="multipart/form-data">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="judul" class="form-label">Judul Kelas</label>
+            <input type="text" class="form-control" name="judul" value="<%= judul %>" required />
+          </div>
 
-        <div class="mb-3">
-          <label for="nama" class="form-label">Nama Kategori</label>
-          <select class="form-select" aria-label="Pilih Alat" name="id_kategori" required>
-              <option selected>Pilih Kategori</option>
+          <div class="col-md-6 mb-3">
+            <label for="id_kategori" class="form-label">Nama Kategori</label>
+            <select class="form-select" aria-label="Pilih Kategori" name="id_kategori" required>
+              <option selected disabled>Pilih Kategori</option>
               <% for(var i=0; i < data1.length; i++){ %>
-                  <option value="<%= data1[i].id_kategori %>"><%= data1[i].nama_kategori %></option>
+                <option value="<%= data1[i].id_kategori %>"><%= data1[i].nama_kategori %></option>
               <% } %>
-          </select>
-      </div>
-      
-        <div class="mb-3">
-          <label for="nama" class="form-label">Nama Alat</label>
-          <select class="form-select" aria-label="Pilih Alat" name="id_alat" required>
-              <option selected>Pilih Alat</option>
+            </select>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="id_alat" class="form-label">Nama Alat</label>
+            <select class="form-select" aria-label="Pilih Alat" name="id_alat" required>
+              <option selected disabled>Pilih Alat</option>
               <% for(var i=0; i < data2.length; i++){ %>
-                  <option value="<%= data2[i].id_alat %>"><%= data2[i].nama_alat %></option>
+                <option value="<%= data2[i].id_alat %>"><%= data2[i].nama_alat %></option>
               <% } %>
-          </select>
-      </div>
-        <div class="mb-3">
-            <label for="nama" class="form-label">Deskripsi</label>
-            <input type="text" class="form-control" name="deskripsi" value="<%= deskripsi %>" required>
-        </div>   
-        <div class="mb-3">
-            <label for="nama" class="form-label">Harga Kelas</label>
-            <input type="text" class="form-control" name="harga_kelas" value="<%= harga_kelas %>" required>
-        </div>   
-        <div class="mb-3">
-            <label for="nama" class="form-label">Link Kelas</label>
-            <input type="text" class="form-control" name="link_kelas" value="<%= link_kelas %>" required>
-        </div>   
-        <div class="mb-3">
-            <label for="nama" class="form-label">Foto Kelas</label>
-            <input type="file" class="form-control" name="file_kelas" required>
-        </div>   
-        <div class="mb-3">
-        <button type="submit" class="btn btn-sm btn-success">Simpan</button>
+            </select>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="id_alur_belajar" class="form-label">Alur Belajar</label>
+            <select class="form-select" aria-label="Pilih Alur Belajar" name="id_alur_belajar" required>
+              <option selected disabled>Pilih Alur Belajar</option>
+              <% for(var i=0; i < data3.length; i++){ %>
+                <option value="<%= data3[i].id_alur_belajar %>"><%= data3[i].alur_belajar %></option>
+              <% } %>
+            </select>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="deskripsi" class="form-label">Deskripsi</label>
+            <input type="text" class="form-control" name="deskripsi" value="<%= deskripsi %>" required />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="harga_kelas" class="form-label">Harga Kelas</label>
+            <input type="text" class="form-control" name="harga_kelas" value="<%= harga_kelas %>" required />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="urutan" class="form-label">Urutan</label>
+            <input type="text" class="form-control" name="urutan" value="<%= urutan %>" required />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="file_kelas" class="form-label">Foto Kelas</label>
+            <input type="file" class="form-control" name="file_kelas" required />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <button type="submit" class="btn btn-sm btn-success">Simpan</button>
+          </div>
         </div>
       </form>
     </div>

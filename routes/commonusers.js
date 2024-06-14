@@ -157,16 +157,16 @@ router.get('/alur/:id', async function (req, res, next) {
       if (Data[0].role != 3) {
         res.redirect('/logout');
       } else {
-        // Get the category ID from the URL parameter
-        let kategoriId = req.params.id;
+        // Get the alur_belajar ID from the URL parameter
+        let alurBelajarId = req.params.id;
 
         // Ambil data alat dan alur_belajar
         let alat = await Model_Alat.getAll();
-        let kelas = await Model_Kelas.getByIdAlurBelajar(kategoriId);
+        let kelas = await Model_Kelas.getByIdAlurBelajar(alurBelajarId);
         let video = await Model_Video.getAll();
         let alur_belajar = await Model_Alur_Belajar.getAll();
-        let kategori = await Model_Kategori_Pembelajaran.getId(kategoriId);
-        let kategoris = await Model_Kategori_Pembelajaran.getAll();
+        let alur_belajarR = await Model_Alur_Belajar.getId(alurBelajarId);
+        let kategori = await Model_Kategori_Pembelajaran.getAll();
 
         // Render halaman dengan data
         res.render("users/detail_common/alur_belajar", {
@@ -178,9 +178,9 @@ router.get('/alur/:id', async function (req, res, next) {
           kelas: kelas,
           video: video,
           alur: alur_belajar[0],
+          alurr: alur_belajarR[0],
           alur_belajar: alur_belajar,
-          kategoris: kategori[0],
-          kategori: kategori[0]
+          kategori: kategori
         });
       }
     } else {
@@ -190,6 +190,7 @@ router.get('/alur/:id', async function (req, res, next) {
     next(error);
   }
 });
+
 
 
 router.post('/tonton/:id', async function (req, res, next) {
