@@ -187,7 +187,7 @@ router.get('/alur/:id', async function (req, res, next) {
           role: req.session.role,
           alat: alat,
           kelas: kelas,
-          video: video,
+          video: video[0],
           alur: alur_belajar[0],
           alurr: alur_belajarR[0],
           alur_belajar: alur_belajar,

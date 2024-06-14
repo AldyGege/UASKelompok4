@@ -89,107 +89,70 @@
             <div class="col-lg-6 col-md-8 mb-4">
                 <div class="content">
                     <h5 style="font-weight: bold; font-size: 1.2rem; color: green;">Well-Designed Roadmap</h5>
-                    <p style="font-weight: bold; font-size: 2rem;">Syllabus Become User-Interface Designer</p>
+                    <p style="font-weight: bold; font-size: 2rem;">Full Syllabus </p>
                 </div>
             </div>
         </div>
         <!-- Akhir Project Three Row-->
 
-<!-- Project Four Row -->
-<% kelas.forEach(function(activity, index) { %>
-    <div class="row gx-4 mb-4 mb-lg-5 justify-content-center">
-        <!-- Card Pertama -->
-        <div class="col-lg-8 col-md-10 mb-4">
-            <!-- Ikon Panah Kebawah -->
-            <% if (index > 0) { %>
-            <div class="text-center mb-4">
-                <i class="fas fa-chevron-down fa-3x text-primary"></i>
+        <!-- Project Four Row -->
+        <% kelas.forEach(function(activity, index) { %>
+            <div class="row gx-4 mb-4 mb-lg-5 justify-content-center">
+                <!-- Ikon Panah Besar di Atas Tiap Perulangan -->
+                <div class="text-center mb-4">
+                    <i class="fas fa-chevron-down fa-5x text-primary"></i>
+                </div>
+                
+                <!-- Card Pertama -->
+                <div class="col-lg-8 col-md-10 mb-4">
+                    <!-- Ikon Panah Kebawah -->
+                    <% if (index > 0) { %>
+                    <div class="text-center mb-4">
+                        <i class="fas fa-chevron-down fa-3x text-primary"></i>
+                    </div>
+                    <% } %>
+                    <div class="card h-100 position-relative card-expand" style="overflow: hidden; transition: all 0.3s;">
+                        <div class="card-body d-flex align-items-start">                   
+                            <div class="col-md-12">
+                                <h5 class="card-title mb-3 text-center">
+                                    <a href="/commonusers/course/<%= activity.id_kelas %>" class="card-link">
+                                        <h5 class="card-title" style="font-weight: bold; font-size: 1.8rem;"><%= activity.judul %></h5>
+                                    </a>
+                                </h5>
+                                <ul class="card-text points-list" style="list-style-type: none; padding-left: 20px; margin-top: 10px; display: none;">
+                                    <!-- Your list items here if needed -->
+                                </ul>
+                                <div class="text-center mx-auto">
+                                    <a href="/commonusers/course/<%= activity.id_kelas %>" class="btn btn-primary btn-sm me-2 rounded-pill" style="background-color: #00B0FF; color: white;">
+                                        <p>Load More</p>
+                                    </a>   
+                                </div>                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <% } %>
-            <div class="card h-100 position-relative card-expand" style="overflow: hidden; transition: all 0.3s;">
-                <div class="card-body d-flex align-items-start">
-                    <!-- Video Utama -->
-                    <div class="col-md-6">
-                        <div class="video-container" onclick="changeVideo('<%= activity.video_url %>', '<%= activity.video_id %>')">
-                            <img src="https://img.youtube.com/vi/<%= activity.video_id %>/hqdefault.jpg" alt="Video Thumbnail" style="width: 100%; cursor: pointer;" onclick="changeVideo('<%= activity.video_url %>', '<%= activity.video_id %>')">
-                            <div class="play-button"></div>
-                        </div>                        
-                    </div>                    
-                    <div class="col-md-6">
-                        <h5 class="card-title mb-3 text-center">
-                            <a href="/commonusers/course/<%= activity.id_kelas %>" class="card-link">
-                                <h5 class="card-title" style="font-weight: bold; font-size: 1.8rem;"><%= activity.judul %></h5>
-                            </a>
-                        </h5>
-                        <ul class="card-text points-list" style="list-style-type: none; padding-left: 20px; margin-top: 10px; display: none;">
-                            <!-- Your list items here if needed -->
-                        </ul>
-                            <div class="text-center  mx-auto">
-                                <a href="/commonusers/course/<%= activity.id_kelas %>" Class="btn btn-primary btn-sm me-2 rounded-pill" style="background-color: #00B0FF; color: white;">
-                                    <p>Load More</p>
-                                </a>   
-                            </div>                                    
+        <% }); %>
+        <!-- Akhir Project Four Row -->
+
+        <!-- Modal Structure -->
+        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="videoModalLabel">Video</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe id="main-video" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-<% }); %>
-<!-- Akhir Project Four Row -->
+        <!-- Akhir Modal Structure -->
 
-<!-- Modal Structure -->
-<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="videoModalLabel">Video</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <iframe id="main-video" width
-                ="100%" height="400" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Akhir Modal Structure -->
-
-<!-- Ruang antara Project Six dan Project Seven -->
-<div class="mb-4 mb-7"></div>
-</div>
-</section>
-
-<!-- Signup-->
-<section class="signup-section" id="signup">
-    <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5">
-            <div class="col-md-10 col-lg-8 mx-auto text-center">
-                <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
-                <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
-                <form class="form-signup" id="contactForm" data-sb-form-api-token="API_TOKEN">
-                    <!-- Email address input-->
-                    <div class="row input-group-newsletter">
-                        <div class="col"><input class="form-control" id="emailAddress" type="email" placeholder="Enter email address..." aria-label="Enter email address..." data-sb-validations="required,email" /></div>
-                        <div class="col-auto"><button class="btn btn-primary disabled" id="submitButton" type="submit">Notify Me!</button></div>
-                    </div>
-                    <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:required">An email is required.</div>
-                    <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:email">Email is not valid.</div>
-                    <!-- Submit success message-->
-                    <div class="d-none" id="submitSuccessMessage">
-                        <div class="text-center mb-3 mt-2 text-white">
-                            <div class="fw-bolder">Form submission successful!</div>
-                            To activate this form, sign up at
-                            <br />
-                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                        </div>
-                    </div>
-                    <!-- Submit error message-->
-                    <div class="d-none" id="submitErrorMessage">
-                        <div class="text-center text-danger mb-3 mt-2">Error sending message!</div>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <!-- Ruang antara Project Six dan Project Seven -->
+        <div class="mb-4 mb-7"></div>
     </div>
 </section>
 
@@ -202,28 +165,31 @@
 <script>
      var globalVideoIDs; // Variabel global untuk menyimpan id_video dari video yang dipilih
 
-function changeVideo(videoUrl, idvideo) {
-    globalVideoIDs = idvideo;  // Simpan ID video secara global jika diperlukan
-    var videoId = getYouTubeVideoId(videoUrl);
-    var mainVideo = document.getElementById('main-video');
-    mainVideo.src = 'https://www.youtube.com/embed/' + videoId;
-    $('#videoModal').modal('show'); // Tampilkan modal setelah mengatur URL video
-}
+     window.onload = function() {
+        changeVideo();
+    };
+    function changeVideo() {
+        globalVideoIDs = video.link_video;  // Simpan ID video secara global jika diperlukan
+        var videoId = getYouTubeVideoId(globalVideoIDs);
+        var mainVideo = document.getElementById('main-video');
+        mainVideo.src = 'https://www.youtube.com/embed/' + videoId;
+        $('#videoModal').modal('show'); // Tampilkan modal setelah mengatur URL video
+    }
 
-function getYouTubeVideoId(url) {
-    var videoId = '';
-    var match = url.match(/[?&]v=([^&]+)/);
-    if (match) {
-        videoId = match[1];
-    } else {
-        // Handle youtu.be URL format if necessary
-        match = url.match(/youtu\.be\/([^&]+)/);
+    function getYouTubeVideoId(url) {
+        var videoId = '';
+        var match = url.match(/[?&]v=([^&]+)/);
         if (match) {
             videoId = match[1];
+        } else {
+            // Handle youtu.be URL format if necessary
+            match = url.match(/youtu\.be\/([^&]+)/);
+            if (match) {
+                videoId = match[1];
+            }
         }
+        return videoId;
     }
-    return videoId;
-}
     document.addEventListener("DOMContentLoaded", function() {
         const hiddenContent = document.querySelectorAll('.hidden-content .col-lg-4');
         hiddenContent.forEach((element, index) => {
